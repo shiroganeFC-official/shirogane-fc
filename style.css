@@ -1055,3 +1055,656 @@ main {
     flex: 1; /* mainの中身を広げる設定 */
 }
 /*----------------------------- 規約ダウンロード / Regulations -----------------------------*/
+
+
+/**/
+/* --- Parents Page Styles --- */
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 1. Hero Section */
+.parents-hero {
+    text-align: center;
+    padding: 80px 0 100px;
+    position: relative;
+}
+
+.hero-content .sub-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--clr-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.hero-content .main-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1.3;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+}
+
+.hero-content .lead-text {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 2. Message Blocks */
+.parents-content {
+    padding-bottom: 100px;
+}
+
+.message-block {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 120px;
+}
+
+.message-block.inverse {
+    flex-direction: row-reverse;
+}
+
+.message-block .icon-wrap {
+    flex: 0 0 150px;
+    height: 150px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.message-block .icon-wrap i {
+    font-size: 4rem;
+    color: var(--clr-blue);
+    background: linear-gradient(135deg, var(--clr-blue) 0%, #a0c4ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.message-block .text-wrap {
+    flex: 1;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: #333;
+}
+
+.message-block .text-wrap strong {
+    color: var(--clr-blue);
+    font-weight: 700;
+}
+
+.message-block .text-wrap.bg-light {
+    background: #fdfdfd;
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid #f0f0f0;
+}
+
+.highlight-text {
+    color: var(--clr-blue);
+    font-weight: 700;
+    margin-top: 20px;
+    position: relative;
+    padding-left: 15px;
+}
+
+.highlight-text::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    bottom: 5px;
+    width: 4px;
+    background: var(--clr-blue);
+    border-radius: 2px;
+}
+
+/* 3. Brilliant Box */
+.brilliant-box {
+    margin-top: 40px;
+    background: linear-gradient(135deg, rgba(30, 60, 150, 0.05) 0%, rgba(30, 60, 150, 0.01) 100%);
+    padding: 30px;
+    border-radius: 15px;
+    border-left: 5px solid var(--clr-blue);
+    position: relative;
+    overflow: hidden;
+}
+
+.brilliant-box::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 60%);
+    opacity: 0.5;
+}
+
+/* 4. Future Block */
+.future-block {
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 30px;
+    padding: 80px 40px;
+    text-align: center;
+    display: block;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+
+.future-block .icon-main i {
+    font-size: 5rem;
+    color: var(--clr-red);
+    margin-bottom: 30px;
+}
+
+.future-block p {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: #ccc;
+    margin-bottom: 40px;
+}
+
+.future-block .final-message {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.4;
+    color: #fff;
+    background: linear-gradient(135deg, #fff 0%, #a0c4ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 5. Fade-in Animation Classes */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s, transform 1s;
+}
+
+.fade-in.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 6. Responsive Styles */
+@media (max-width: 768px) {
+    .hero-content .main-title { font-size: 2rem; }
+    .message-block { flex-direction: column; gap: 30px; text-align: center; margin-bottom: 80px; }
+    .message-block.inverse { flex-direction: column; }
+    .message-block .icon-wrap { flex: 0 0 120px; height: 120px; }
+    .message-block .icon-wrap i { font-size: 3rem; }
+    .future-block .final-message { font-size: 1.6rem; }
+    .future-block p { font-size: 1.1rem; }
+}
+/*-------------------- for parents section --------------------*/
+/* --- Parents Page Styles --- */
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 1. Hero Section */
+.parents-hero {
+    text-align: center;
+    padding: 80px 0 100px;
+    position: relative;
+}
+
+.hero-content .sub-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--clr-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.hero-content .main-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1.3;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+}
+
+.hero-content .lead-text {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 2. Message Blocks */
+.parents-content {
+    padding-bottom: 100px;
+}
+
+.message-block {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 120px;
+}
+
+.message-block.inverse {
+    flex-direction: row-reverse;
+}
+
+.message-block .icon-wrap {
+    flex: 0 0 150px;
+    height: 150px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.message-block .icon-wrap i {
+    font-size: 4rem;
+    color: var(--clr-blue);
+    background: linear-gradient(135deg, var(--clr-blue) 0%, #a0c4ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.message-block .text-wrap {
+    flex: 1;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: #333;
+}
+
+.message-block .text-wrap strong {
+    color: var(--clr-blue);
+    font-weight: 700;
+}
+
+.message-block .text-wrap.bg-light {
+    background: #fdfdfd;
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid #f0f0f0;
+}
+
+.highlight-text {
+    color: var(--clr-blue);
+    font-weight: 700;
+    margin-top: 20px;
+    position: relative;
+    padding-left: 15px;
+}
+
+.highlight-text::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    bottom: 5px;
+    width: 4px;
+    background: var(--clr-blue);
+    border-radius: 2px;
+}
+
+/* 3. Brilliant Box */
+.brilliant-box {
+    margin-top: 40px;
+    background: linear-gradient(135deg, rgba(30, 60, 150, 0.05) 0%, rgba(30, 60, 150, 0.01) 100%);
+    padding: 30px;
+    border-radius: 15px;
+    border-left: 5px solid var(--clr-blue);
+    position: relative;
+    overflow: hidden;
+}
+
+.brilliant-box::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 60%);
+    opacity: 0.5;
+}
+
+/* 4. Future Block */
+.future-block {
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 30px;
+    padding: 80px 40px;
+    text-align: center;
+    display: block;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+
+.future-block .icon-main i {
+    font-size: 5rem;
+    color: var(--clr-red);
+    margin-bottom: 30px;
+}
+
+.future-block p {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: #ccc;
+    margin-bottom: 40px;
+}
+
+.future-block .final-message {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.4;
+    color: #fff;
+    background: linear-gradient(135deg, #fff 0%, #a0c4ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 5. Fade-in Animation Classes */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s, transform 1s;
+}
+
+.fade-in.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* for_parents.html 全体の背景設定 */
+body.parents-page {
+    position: relative;
+    background-color: #fff; /* ベースは白 */
+    overflow-x: hidden; /* パンダが画面からはみ出た部分を隠す */
+}
+
+/* 巨大パンダの透かし背景（擬似要素 ::before を使用） */
+body.parents-page::before {
+    content: '';
+    position: fixed; /* 画面に固定（スクロールしても付いてくる） */
+    top: 50%; /* 画面の中央に配置 */
+    left: 50%;
+    transform: translate(-50%, -50%); /* 完全に中央揃え */
+    
+    /* 画像の設定 */
+    width: 120vh; /* 画面の高さ(vh)に合わせて巨大化させる（スマホでもPCでもOK） */
+    height: 120vh;
+    background-image: url('assets/img/shirogane_panda.png'); /* 画像のパス */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    /* 透かし（Brilliant & Sophisticated）の核心部分 */
+    opacity: 0.04; /* 不透明度を4%に設定。これくらいが一番上品です */
+    z-index: -1; /* コンテンツ（文字など）の後ろに配置 */
+    filter: grayscale(100%); /* 白黒にして、より洗練された印象に */
+    pointer-events: none; /* この背景画像はクリックなどを検知しない */
+}
+
+/* ヒーローセクションの背景を透明にしてパンダを見せる */
+.parents-hero {
+    background: transparent;
+}
+
+/* 6. Responsive Styles */
+@media (max-width: 768px) {
+    .hero-content .main-title { font-size: 2rem; }
+    .message-block { flex-direction: column; gap: 30px; text-align: center; margin-bottom: 80px; }
+    .message-block.inverse { flex-direction: column; }
+    .message-block .icon-wrap { flex: 0 0 120px; height: 120px; }
+    .message-block .icon-wrap i { font-size: 3rem; }
+    .future-block .final-message { font-size: 1.6rem; }
+    .future-block p { font-size: 1.1rem; }
+}
+/*-------------------- for parents section --------------------*/
+
+
+/*-------------------- join us section --------------------*/
+/* --- Join Us Page Styles --- */
+.join-hero { text-align: center; padding: 60px 0; }
+.join-content { padding-bottom: 80px; }
+
+.block-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 40px;
+    text-align: center;
+}
+.block-title span {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--clr-blue);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+/* 参加ステップ */
+.step-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 20px;
+}
+.step-item {
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    position: relative;
+    border-top: 5px solid var(--clr-blue);
+}
+.step-num {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(30, 60, 150, 0.1);
+}
+
+/* 費用・持ち物カード */
+.flex-row { display: flex; gap: 30px; margin-bottom: 60px; flex-wrap: wrap; }
+.glass-card {
+    flex: 1;
+    min-width: 300px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+}
+.cost-highlight {
+    background: var(--clr-blue);
+    color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+}
+.cost-highlight strong { font-size: 1.8rem; }
+.item-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; padding: 0; }
+.item-tags li {
+    background: #f0f4ff;
+    color: var(--clr-blue);
+    padding: 8px 15px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Instagramボタン */
+.insta-invite { text-align: center; margin-top: 60px; }
+.insta-btn {
+    display: inline-block;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #fff;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.3s;
+}
+.insta-btn:hover { transform: scale(1.05); }
+
+/* バッジ */
+.badge-row { display: flex; justify-content: center; gap: 15px; margin-top: 40px; }
+.badge {
+    border: 1px solid #ddd;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/*-------------------- join us section --------------------*/
+
+/*-------------------- gear cost section --------------------*/
+/* --- Gear Cost Page Styles --- */
+/* ヒーローセクション全体を中央揃えに */
+.gear-hero {
+    text-align: center;
+    padding: 80px 0 60px; /* 上下の余白を少し広げてゆとりを持たせる */
+}
+
+/* 英語サブタイトル (Cost & Equipment Guide) を拡大 */
+.gear-hero .sub-title {
+    font-size: 1.2rem; /* 0.9remから拡大 */
+    letter-spacing: 0.3em; /* 文字間隔を広げてより洗練された印象に */
+    margin-bottom: 15px;
+}
+
+/* メインタイトル (サッカーを始める際の見積書) を大幅に拡大 */
+.gear-hero .main-title {
+    font-size: 3.5rem; /* 大胆に拡大。他のトップレベルタイトルと合わせる */
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 30px;
+    /* 少しグラデーションをかけてGorgeousさを出してもCoolです */
+    background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* コーチへの相談メッセージの横幅を調整して中央に */
+.hero-message {
+    display: inline-block; /* 中央揃えを維持 */
+    max-width: 700px; /* 横に広がりすぎないように制限 */
+    line-height: 1.8;
+}
+
+.section-label {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: var(--clr-blue);
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* 活動費カード */
+.cost-summary-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+}
+.cost-item-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #ddd;
+}
+.cost-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+.cost-box {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+.cost-box.highlight {
+    background: var(--clr-blue);
+    color: #fff;
+}
+.cost-box .val { font-size: 1.6rem; font-weight: 800; }
+
+/* ギアグリッド */
+.gear-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+.gear-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    border-left: 5px solid var(--clr-red);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+}
+.gear-card h3 { font-size: 1.1rem; margin-bottom: 10px; display: flex; flex-direction: column; }
+.gear-card h3 span { color: var(--clr-red); font-size: 1.4rem; }
+
+/* スパイクアドバイス */
+.spike-advice {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 50px;
+    border-radius: 30px;
+    margin-top: 80px;
+}
+.spike-detail {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+}
+.merit, .demerit {
+    flex: 1;
+    padding: 20px;
+    border-radius: 10px;
+}
+.merit { background: rgba(255,255,255,0.1); border-top: 4px solid var(--clr-blue); }
+.demerit { background: rgba(255,255,255,0.1); border-top: 4px solid var(--clr-red); }
+.merit span, .demerit span { font-weight: 900; letter-spacing: 2px; display: block; margin-bottom: 10px; }
+
+@media (max-width: 768px) {
+    .spike-detail { flex-direction: column; }
+}
+/* スマートフォン向けの調整 */
+@media (max-width: 768px) {
+    .gear-hero .main-title {
+        font-size: 2.2rem; /* スマホでは適切な大きさに縮小 */
+    }
+}
+
+/*-------------------- gear cost section --------------------*/
