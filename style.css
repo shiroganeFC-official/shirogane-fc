@@ -984,3 +984,74 @@ textarea:focus {
         align-items: center;
     }
 }
+
+
+/*----------------------------- 規約ダウンロード / Regulations -----------------------------*/
+.download-section {
+    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.download-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.download-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 280px;
+    padding: 20px;
+    text-decoration: none;
+    border-radius: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 2px solid transparent;
+}
+
+/* ホバー時の動き（4枚のカードと統一） */
+.download-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.btn-jp { border-color: var(--clr-blue); color: var(--clr-blue); }
+.btn-en { border-color: var(--clr-red); color: var(--clr-red); }
+
+.sub-title {
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    opacity: 0.7;
+}
+
+.main-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+/* mainタグの最小の高さを設定する */
+main {
+    /* 画面全体の高さ(100vh)から、ヘッダーとフッターの分を引いた値を最小の高さにする */
+    min-height: calc(100vh - 200px); /* 200pxの部分は実際のヘッダー+フッターに合わせて調整 */
+    
+    /* もしこれだけで解決しない場合は、以下も試してみてください */
+    display: flex;
+    flex-direction: column;
+}
+
+/* 規約ダウンロードセクションの余白を調整して高さを稼ぐ */
+.download-section {
+    padding: 100px 20px; /* 上下の余白(padding)を広げることで、コンテンツに厚みを出します */
+    flex: 1; /* mainの中身を広げる設定 */
+}
+/*----------------------------- 規約ダウンロード / Regulations -----------------------------*/
