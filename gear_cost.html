@@ -37,14 +37,29 @@
     </nav>
 </header>
 
-<main class="parents-page"> <section class="gear-hero">
+<main class="parents-page"> <div class="lang-switch-container container">
+        <div class="lang-switch">
+            <button onclick="switchLanguage('ja')" id="btn-ja" class="active">JP</button>
+            <button onclick="switchLanguage('en')" id="btn-en">EN</button>
+        </div>
+    </div>
+
+    <section class="gear-hero">
         <div class="color-stripe stripe-blue"></div>
         <div class="color-stripe stripe-red"></div>
-        <div class="container">
+        <div class="container hero-content">
             <span class="sub-title">Cost & Equipment Guide</span>
-            <h1 class="main-title">サッカーを始める際にかかる費用</h1>
-            <div class="hero-message">
-                <p>基本的なことをまとめました。<br>わからないことや困った事があれば、いつでもコーチに相談に来てください。</p>
+            <div class="lang-ja">
+                <h1 class="main-title">サッカーを始める際にかかる費用</h1>
+                <div class="hero-message">
+                    <p>基本的なことをまとめました。<br>わからないことや困った事があれば、いつでもコーチに相談に来てください。</p>
+                </div>
+            </div>
+            <div class="lang-en" style="display: none;">
+                <h1 class="main-title">Initial Costs & Equipment Guide</h1>
+                <div class="hero-message">
+                    <p>We have summarized the basic costs.<br>If you have any questions or concerns, please feel free to consult a coach at any time.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -52,122 +67,221 @@
     <div class="container gear-content">
         
         <section class="gear-section fade-in">
-            <h2 class="section-label"><i class="fas fa-coins"></i> 活動費</h2>
+            <div class="lang-ja"><h2 class="section-label"><i class="fas fa-coins"></i> 活動費</h2></div>
+            <div class="lang-en" style="display: none;"><h2 class="section-label"><i class="fas fa-coins"></i> Activity Fees</h2></div>
+            
             <div class="cost-summary-card">
                 <div class="cost-item-row">
-                    <span>入会費・年会費</span>
-                    <span class="price">¥0</span>
+                    <div class="lang-ja"><span>入会費・年会費</span> <span class="price">¥0</span></div>
+                    <div class="lang-en" style="display: none;"><span>Admission & Annual Fee</span> <span class="price">¥0</span></div>
                 </div>
                 <div class="cost-grid">
                     <div class="cost-box">
-                        <p class="label">選手登録費 (年1回)</p>
-                        <p class="val">¥800</p>
+                        <div class="lang-ja">
+                            <p class="label">選手登録費 (年1回)</p>
+                            <p class="val">¥800</p>
+                        </div>
+                        <div class="lang-en" style="display: none;">
+                            <p class="label">Player Registration (Annual)</p>
+                            <p class="val">¥800</p>
+                        </div>
                     </div>
                     <div class="cost-box">
-                        <p class="label">スポーツ保険 (年1回)</p>
-                        <p class="val">¥800</p>
+                        <div class="lang-ja">
+                            <p class="label">スポーツ保険 (年1回)</p>
+                            <p class="val">¥800</p>
+                        </div>
+                        <div class="lang-en" style="display: none;">
+                            <p class="label">Sports Insurance (Annual)</p>
+                            <p class="val">¥800</p>
+                        </div>
                     </div>
                     <div class="cost-box highlight">
-                        <p class="label">月会費</p>
-                        <p class="val">¥1,500 <span>(年換算 ¥18,000)</span></p>
+                        <div class="lang-ja">
+                            <p class="label">月会費</p>
+                            <p class="val">¥1,500 <span>(年換算 ¥18,000)</span></p>
+                        </div>
+                        <div class="lang-en" style="display: none;">
+                            <p class="label">Monthly Fee</p>
+                            <p class="val">¥1,500 <span>(Total ¥18,000/year)</span></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="gear-section fade-in">
-            <h2 class="section-label"><i class="fas fa-tshirt"></i> チーム指定購入物（税込）</h2>
+            <div class="lang-ja"><h2 class="section-label"><i class="fas fa-tshirt"></i> チーム指定購入物（税込）</h2></div>
+            <div class="lang-en" style="display: none;"><h2 class="section-label"><i class="fas fa-tshirt"></i> Team Uniform Items (Tax Incl.)</h2></div>
+            
             <div class="gear-grid">
                 <div class="gear-card team-only">
                     <div class="gear-info">
-                        <h3>個人ユニフォーム <span>¥5,000</span></h3>
-                        <p>練習・練習試合等で使用する、番号・名前入りの一着です。</p>
+                        <div class="lang-ja">
+                            <h3>個人ユニフォーム <span>¥5,000</span></h3>
+                            <p>練習・練習試合等で使用する、番号・名前入りの一着です。</p>
+                        </div>
+                        <div class="lang-en" style="display: none;">
+                            <h3>Personalized Uniform <span>¥5,000</span></h3>
+                            <p>Used for practice and matches. Includes your number and name.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="gear-card team-only">
                     <div class="gear-info">
-                        <h3>黒ゲームパンツ <span>¥1,500</span></h3>
-                        <p>全学年共通で使用します。</p>
+                        <div class="lang-ja">
+                            <h3>黒ゲームパンツ <span>¥1,500</span></h3>
+                            <p>全学年共通で使用します。</p>
+                        </div>
+                        <div class="lang-en" style="display: none;">
+                            <h3>Black Game Shorts <span>¥1,500</span></h3>
+                            <p>Used by all grade levels.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="gear-card team-only">
                     <div class="gear-info">
-                        <h3>紫ソックス <span>¥850</span></h3>
-                        <p>キッズ〜4年生が使用します。</p>
+                        <div class="lang-ja">
+                            <h3>紫ソックス <span>¥850</span></h3>
+                            <p>キッズ〜4年生が使用します。</p>
+                        </div>
+                        <div class="lang-en" style="display: none;">
+                            <h3>Purple Socks <span>¥850</span></h3>
+                            <p>Used by Pre-K to 4th grade.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="gear-card team-only">
                     <div class="gear-info">
-                        <h3>赤ソックス <span>¥850</span></h3>
-                        <p>キッズ〜6年生が使用します。</p>
+                        <div class="lang-ja">
+                            <h3>赤ソックス <span>¥850</span></h3>
+                            <p>キッズ〜6年生が使用します。</p>
+                        </div>
+                        <div class="lang-en" style="display: none;">
+                            <h3>Red Socks <span>¥850</span></h3>
+                            <p>Used by Pre-K to 6th grade.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <p class="order-note">※随時チームでとりまとめ、メーカーに一括注文いたします。</p>
+            <div class="lang-ja"><p class="order-note">※随時チームでとりまとめ、メーカーに一括注文いたします。</p></div>
+            <div class="lang-en" style="display: none;"><p class="order-note">*The team handles bulk ordering from the manufacturer periodically.</p></div>
         </section>
 
         <section class="gear-section fade-in">
-            <h2 class="section-label"><i class="fas fa-shopping-cart"></i> その他必須購入物</h2>
+            <div class="lang-ja"><h2 class="section-label"><i class="fas fa-shopping-cart"></i> その他必須購入物</h2></div>
+            <div class="lang-en" style="display: none;"><h2 class="section-label"><i class="fas fa-shopping-cart"></i> Other Required Items</h2></div>
+            
             <div class="must-buy-list">
                 <div class="must-item">
-                    <h4>4号サッカーボール</h4>
-                    <p>メーカーにより品質が異なるので、最初は店員さんに相談しての購入が安心です。</p>
+                    <div class="lang-ja">
+                        <h4>4号サッカーボール</h4>
+                        <p>メーカーにより品質が異なるので、最初は店員さんに相談しての購入が安心です。</p>
+                    </div>
+                    <div class="lang-en" style="display: none;">
+                        <h4>Size 4 Soccer Ball</h4>
+                        <p>Quality varies by brand. It is best to consult shop staff for your first purchase.</p>
+                    </div>
                 </div>
                 <div class="must-item">
-                    <h4>トレーニングシューズ（トレシュー）</h4>
-                    <p>蝶々結びができるまではマジックテープ式がおすすめ。Jrモデルはデザイン性で価格が変わります。</p>
+                    <div class="lang-ja">
+                        <h4>トレーニングシューズ（トレシュー）</h4>
+                        <p>蝶々結びができるまではマジックテープ式がおすすめ。Jrモデルはデザイン性で価格が変わります。</p>
+                    </div>
+                    <div class="lang-en" style="display: none;">
+                        <h4>Training Shoes (Turf Shoes)</h4>
+                        <p>Velcro straps are recommended until the child can tie laces. Prices vary based on design.</p>
+                    </div>
                 </div>
                 <div class="must-item">
-                    <h4>バックパック（リュック）</h4>
-                    <p>ボールも一緒に収納できるタイプが移動時に便利でおすすめです。</p>
+                    <div class="lang-ja">
+                        <h4>バックパック（リュック）</h4>
+                        <p>ボールも一緒に収納できるタイプが移動時に便利でおすすめです。</p>
+                    </div>
+                    <div class="lang-en" style="display: none;">
+                        <h4>Backpack</h4>
+                        <p>A backpack that can hold a soccer ball is highly recommended for convenience.</p>
+                    </div>
                 </div>
                 <div class="must-item">
-                    <h4>すねあて (約¥1,000)</h4>
-                    <p>サイズ感が重要です。店員さんに確認して購入しましょう。</p>
+                    <div class="lang-ja">
+                        <h4>すねあて (約¥1,000)</h4>
+                        <p>サイズ感が重要です。店員さんに確認して購入しましょう。</p>
+                    </div>
+                    <div class="lang-en" style="display: none;">
+                        <h4>Shin Guards (Approx. ¥1,000)</h4>
+                        <p>Size and fit are key. Please check with shop staff before buying.</p>
+                    </div>
                 </div>
                 <div class="must-item">
-                    <h4>紺ソックス (約¥1,400)</h4>
-                    <p>4年生〜6年生が使用します。</p>
+                    <div class="lang-ja">
+                        <h4>紺ソックス (約¥1,400)</h4>
+                        <p>4年生〜6年生が使用します。</p>
+                    </div>
+                    <div class="lang-en" style="display: none;">
+                        <h4>Navy Socks (Approx. ¥1,400)</h4>
+                        <p>Used by 4th to 6th graders.</p>
+                    </div>
                 </div>
             </div>
             <div class="shop-info">
-                <p><i class="fas fa-store"></i> <strong>八幡のカムイ</strong> 又は <strong>五井のスポーツデポ</strong> で全て揃います。</p>
+                <div class="lang-ja"><p><i class="fas fa-store"></i> <strong>八幡のカムイ</strong> 又は <strong>五井のスポーツデポ</strong> で全て揃います。</p></div>
+                <div class="lang-en" style="display: none;"><p><i class="fas fa-store"></i> Items are available at <strong>Kamui (Yawata)</strong> or <strong>Sports DEPO (Goi)</strong>.</p></div>
             </div>
         </section>
 
         <div class="advice-grid fade-in">
             <div class="advice-card">
-                <h3>季節ごとの備え</h3>
-                <div class="season-flex">
-                    <div class="season">
-                        <h5>[夏季]</h5>
-                        <p>保冷バッグ、帽子、冷却タオル</p>
+                <div class="lang-ja">
+                    <h3>季節ごとの備え</h3>
+                    <div class="season-flex">
+                        <div class="season"><h5>[夏季]</h5><p>保冷バッグ、帽子、冷却タオル</p></div>
+                        <div class="season"><h5>[冬季]</h5><p>手袋、防寒着、インナー上下(指定色あり)</p></div>
                     </div>
-                    <div class="season">
-                        <h5>[冬季]</h5>
-                        <p>手袋、防寒着、インナー上下(指定色あり)</p>
-                    </div>
+                    <p class="small-note">※インナーの色等は規定があるため、購入前にコーチへ確認してください。</p>
                 </div>
-                <p class="small-note">※インナーの色等は規定があるため、購入前にコーチへ確認してください。</p>
+                <div class="lang-en" style="display: none;">
+                    <h3>Seasonal Items</h3>
+                    <div class="season-flex">
+                        <div class="season"><h5>[Summer]</h5><p>Cooler bag, hat, cooling towel</p></div>
+                        <div class="season"><h5>[Winter]</h5><p>Gloves, warm wear, base layers (specific colors)</p></div>
+                    </div>
+                    <p class="small-note">*Base layer colors are regulated; please check with a coach before purchasing.</p>
+                </div>
             </div>
 
             <div class="advice-card">
-                <h3>賢い揃え方</h3>
-                <p>練習着はセール品や中古でも十分！サイズアウトが早いため、年1回の<strong>チームバザー</strong>で先輩のお下がりを安く手に入れるのも賢い選択です。</p>
+                <div class="lang-ja">
+                    <h3>賢い揃え方</h3>
+                    <p>練習着はセール品や中古でも十分！サイズアウトが早いため、年1回の<strong>チームバザー</strong>で先輩のお下がりを安く手に入れるのも賢い選択です。</p>
+                </div>
+                <div class="lang-en" style="display: none;">
+                    <h3>Buying Tips</h3>
+                    <p>Sale items or second-hand gear are fine for practice! Since kids grow fast, buying used items at our <strong>Annual Team Bazaar</strong> is a great option.</p>
+                </div>
             </div>
         </div>
 
         <section class="spike-advice fade-in">
-            <h3><i class="fas fa-exclamation-triangle"></i> スパイクシューズについて</h3>
-            <p>白金FCでは<strong>4年生からの着用を推奨</strong>しています。</p>
+            <div class="lang-ja">
+                <h3><i class="fas fa-exclamation-triangle"></i> スパイクシューズについて</h3>
+                <p>白金FCでは<strong>4年生からの着用を推奨</strong>しています。</p>
+            </div>
+            <div class="lang-en" style="display: none;">
+                <h3><i class="fas fa-exclamation-triangle"></i> Regarding Cleats</h3>
+                <p>Shirogane FC recommends wearing cleats <strong>from 4th grade onwards</strong>.</p>
+            </div>
+            
             <div class="spike-detail">
                 <div class="merit">
                     <span>MERIT</span>
-                    <p>動きが速くなり、キック力が強まります。</p>
+                    <div class="lang-ja"><p>動きが速くなり、キック力が強まります。</p></div>
+                    <div class="lang-en" style="display: none;"><p>Allows for faster movement and stronger kicks.</p></div>
                 </div>
                 <div class="demerit">
                     <span>CAUTION</span>
-                    <p>足への負荷がトレシューの5倍近くかかり、関節痛等の要因になります。体が出来るまではトレシューを推奨します。</p>
+                    <div class="lang-ja"><p>足への負荷がトレシューの5倍近くかかり、関節痛等の要因になります。体が出来るまではトレシューを推奨します。</p></div>
+                    <div class="lang-en" style="display: none;"><p>Impact on feet is 5x higher than training shoes, potentially leading to joint pain. We recommend training shoes until the body matures.</p></div>
                 </div>
             </div>
         </section>

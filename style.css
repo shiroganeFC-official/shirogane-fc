@@ -337,8 +337,97 @@ header {
     transform: scale(1.05);
 }
 
+/*--------------------- NEWS & SCHEDULE SECTION ----------------------------------------*/
+/* NEWS & SCHEDULE SECTION */
+.news-schedule-section {
+    margin: 100px auto;
+}
 
+.news-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+    align-items: start;
+}
 
+/* フライヤー掲示枠 */
+.flyer-frame {
+    background: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.flyer-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid #eee;
+}
+
+.flyer-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(0, 51, 102, 0.85); /* チームブルーの透過 */
+    padding: 15px;
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.flyer-frame:hover .flyer-overlay {
+    transform: translateY(0);
+}
+
+.download-btn-mini {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* 年間スケジュール表 */
+.schedule-table-container {
+    background: #f0f7ff; /* 費用ページの見出しと統一感を出す薄青 */
+    padding: 35px;
+    border-radius: 20px;
+    border-left: 6px solid var(--clr-red); /* アクセントの赤 */
+}
+
+.table-title {
+    color: var(--clr-blue);
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+}
+
+.annual-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.annual-table th {
+    width: 30%;
+    text-align: left;
+    padding: 15px 0;
+    color: var(--clr-blue);
+    border-bottom: 1px solid rgba(0, 51, 102, 0.1);
+    font-size: 1rem;
+}
+
+.annual-table td {
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0, 51, 102, 0.1);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 992px) {
+    .news-grid { grid-template-columns: 1fr; gap: 60px; }
+}
+/*--------------------- NEWS & SCHEDULE SECTION ----------------------------------------*/
 
 /*-------------------- 外部リンクセクション --------------------*/
 /* --- セクションタイトル：他と完全に統一 --- */
@@ -1478,6 +1567,55 @@ body.parents-page::before {
     .future-block .final-message { font-size: 1.6rem; }
     .future-block p { font-size: 1.1rem; }
 }
+
+/* 言語切り替えスイッチの装飾 */
+.lang-switch-container {
+    text-align: right;
+    padding: 20px 0;
+}
+
+.lang-switch {
+    display: inline-flex;
+    border: 2px solid var(--clr-blue);
+    border-radius: 50px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.lang-switch button {
+    padding: 8px 25px;
+    border: none;
+    background: none;
+    font-weight: 800;
+    color: var(--clr-blue);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.lang-switch button.active {
+    background: var(--clr-blue);
+    color: #fff;
+}
+
+/* 初期状態の制御：英語は隠し、日本語は出す */
+.lang-en {
+    display: none; 
+}
+
+.lang-ja {
+    display: block;
+}
+
+/* フェードインアニメーション */
+.lang-ja, .lang-en {
+    animation: langFade 0.5s ease;
+}
+
+@keyframes langFade {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 /*-------------------- for parents section --------------------*/
 
 
@@ -1569,49 +1707,81 @@ body.parents-page::before {
 .insta-btn:hover { transform: scale(1.05); }
 
 /* バッジ */
-.badge-row { display: flex; justify-content: center; gap: 15px; margin-top: 40px; }
-.badge {
-    border: 1px solid #ddd;
-    padding: 5px 15px;
-    border-radius: 5px;
-    font-size: 0.8rem;
-    color: #666;
+/* バッジ全体のレイアウト調整 */
+.badge-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* 画面幅が狭い時に自動で折り返す */
+    gap: 12px;       /* バッジ同士の適度な隙間 */
+    margin: 30px auto;
+    max-width: 800px;
 }
+
+/* バッジ単体の装飾を洗練させる */
+.badge {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    padding: 8px 18px;
+    border-radius: 8px; /* 少し角を丸くして柔らかい印象に */
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap; /* テキストを途中で改行させない */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    transition: all 0.3s ease;
+}
+
+/* スマホ閲覧時の微調整 */
+@media (max-width: 768px) {
+    .badge-row {
+        gap: 8px;
+    }
+    .badge {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+    }
+}
+
+
+
 
 /*-------------------- join us section --------------------*/
 
 /*-------------------- gear cost section --------------------*/
 /* --- Gear Cost Page Styles --- */
 /* ヒーローセクション全体を中央揃えに */
+/* --- Gear Cost Section: Base Layout --- */
 .gear-hero {
     text-align: center;
-    padding: 80px 0 60px; /* 上下の余白を少し広げてゆとりを持たせる */
+    padding: 100px 0 80px; /* 上下の余白をさらに広げてラグジュアリーに */
 }
 
-/* 英語サブタイトル (Cost & Equipment Guide) を拡大 */
 .gear-hero .sub-title {
-    font-size: 1.2rem; /* 0.9remから拡大 */
-    letter-spacing: 0.3em; /* 文字間隔を広げてより洗練された印象に */
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
     margin-bottom: 15px;
 }
 
-/* メインタイトル (サッカーを始める際の見積書) を大幅に拡大 */
 .gear-hero .main-title {
-    font-size: 3.5rem; /* 大胆に拡大。他のトップレベルタイトルと合わせる */
+    font-size: 3.5rem;
     font-weight: 800;
     line-height: 1.2;
     margin-bottom: 30px;
-    /* 少しグラデーションをかけてGorgeousさを出してもCoolです */
     background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-/* コーチへの相談メッセージの横幅を調整して中央に */
 .hero-message {
-    display: inline-block; /* 中央揃えを維持 */
-    max-width: 700px; /* 横に広がりすぎないように制限 */
+    display: inline-block;
+    max-width: 700px;
     line-height: 1.8;
+}
+
+/* セクションごとの間隔を拡大 */
+.gear-section {
+    margin-bottom: 100px; /* セクション間の区分けを明確にするための余白 */
 }
 
 .section-label {
@@ -1619,20 +1789,28 @@ body.parents-page::before {
     align-items: center;
     gap: 15px;
     font-size: 1.8rem;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     color: var(--clr-blue);
     border-bottom: 2px solid #eee;
     padding-bottom: 10px;
 }
 
+/* --- カード共通設定: 背景と同化させない装飾 --- */
+.cost-summary-card,
+.gear-card,
+.advice-card {
+    background: #fcfcfc; /* わずかにグレーを混ぜて白背景から浮かせる */
+    border: 1px solid #ececec; /* 薄い枠線で境界線を強調 */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04); /* 柔らかい影で立体感を出す */
+    transition: transform 0.3s ease;
+}
+
 /* 活動費カード */
 .cost-summary-card {
-    background: #fff;
     border-radius: 20px;
     padding: 40px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-    border: 1px solid #f0f0f0;
 }
+
 .cost-item-row {
     display: flex;
     justify-content: space-between;
@@ -1642,38 +1820,68 @@ body.parents-page::before {
     padding-bottom: 20px;
     border-bottom: 1px dashed #ddd;
 }
+
 .cost-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
 }
+
 .cost-box {
-    background: #f9f9f9;
-    padding: 20px;
+    background: #f0f0f0; /* 背景色のコントラストを上げる */
+    padding: 25px;
     border-radius: 15px;
     text-align: center;
 }
+
+/* 月会費ハイライト */
 .cost-box.highlight {
-    background: var(--clr-blue);
+    background: linear-gradient(135deg, var(--clr-blue), #0056b3); /* 鮮やかなグラデーション */
     color: #fff;
+    transform: scale(1.05); /* 注目度を高めるために少し拡大 */
+    box-shadow: 0 10px 20px rgba(0, 51, 153, 0.2);
 }
+
 .cost-box .val { font-size: 1.6rem; font-weight: 800; }
 
 /* ギアグリッド */
 .gear-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+    gap: 25px;
 }
+
 .gear-card {
-    background: #fff;
-    padding: 25px;
+    padding: 30px;
     border-radius: 15px;
-    border-left: 5px solid var(--clr-red);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+    border-left: 6px solid var(--clr-red); /* 左端のアクセントを太く強調 */
 }
-.gear-card h3 { font-size: 1.1rem; margin-bottom: 10px; display: flex; flex-direction: column; }
-.gear-card h3 span { color: var(--clr-red); font-size: 1.4rem; }
+
+.gear-card h3 { font-size: 1.15rem; margin-bottom: 12px; display: flex; flex-direction: column; }
+.gear-card h3 span { color: var(--clr-red); font-size: 1.5rem; margin-top: 5px; }
+
+/* --- 見出しデザインの強化 (高コントラスト版) --- */
+.must-item h4, 
+.advice-card h3,
+.gear-section h4 {
+    background: #f0f7ff; /* ごく薄い爽やかな青背景 */
+    padding: 12px 18px;
+    border-left: 5px solid var(--clr-red); /* チームカラーの赤 */
+    border-radius: 4px;
+    margin-bottom: 15px;
+    color: #003366; /* 深い紺色で見やすく */
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+}
+
+.must-item p, 
+.advice-card p {
+    padding-left: 20px; 
+    margin-bottom: 40px; /* 本文後の余白を広げる */
+    line-height: 1.8;
+    color: #444;
+}
 
 /* スパイクアドバイス */
 .spike-advice {
@@ -1681,30 +1889,257 @@ body.parents-page::before {
     color: #fff;
     padding: 50px;
     border-radius: 30px;
-    margin-top: 80px;
+    margin-top: 100px; /* 前のセクションとの距離を離す */
 }
+
 .spike-detail {
     display: flex;
     gap: 30px;
     margin-top: 30px;
 }
+
 .merit, .demerit {
     flex: 1;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 25px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.07);
 }
-.merit { background: rgba(255,255,255,0.1); border-top: 4px solid var(--clr-blue); }
-.demerit { background: rgba(255,255,255,0.1); border-top: 4px solid var(--clr-red); }
-.merit span, .demerit span { font-weight: 900; letter-spacing: 2px; display: block; margin-bottom: 10px; }
 
+.merit { border-top: 5px solid var(--clr-blue); }
+.demerit { border-top: 5px solid var(--clr-red); }
+
+/* Response: Smartphone Adjustment */
 @media (max-width: 768px) {
+    .gear-hero .main-title { font-size: 2.2rem; }
     .spike-detail { flex-direction: column; }
+    .gear-section { margin-bottom: 60px; }
+    .cost-box.highlight { transform: scale(1); } /* スマホでは拡大を解除してレイアウト維持 */
 }
-/* スマートフォン向けの調整 */
-@media (max-width: 768px) {
-    .gear-hero .main-title {
-        font-size: 2.2rem; /* スマホでは適切な大きさに縮小 */
+/*-------------------- gear cost section --------------------*/
+
+/*--------------------------- schedule section ---------------------------*/
+/* ==========================================================================
+   SCHEDULE SECTION - TOTAL DESIGN (ULTRA WIDE)
+   ========================================================================== */
+
+/* 1. ヒーローエリア & 切り替えスイッチ */
+.schedule-hero {
+    text-align: center;
+    padding: 120px 0 60px;
+    position: relative;
+    background: transparent; /* 背景を透明にしてパンダを見せる */
+}
+
+.schedule-tab-switch {
+    display: inline-flex;
+    background: #f0f7ff;
+    padding: 6px;
+    border-radius: 50px;
+    margin-top: 30px;
+    border: 1px solid #e0eaff;
+    position: relative;
+    z-index: 20;
+}
+
+.schedule-tab-switch button {
+    padding: 12px 35px;
+    border: none;
+    background: transparent;
+    border-radius: 40px;
+    cursor: pointer;
+    font-weight: 800;
+    color: #003366;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+}
+
+.schedule-tab-switch button.active {
+    background: #003366;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2);
+}
+
+/* 2. メインコンテンツ（背景透過・カード独立設定） */
+.schedule-content.container {
+    max-width: 1400px !important;
+    width: 92%;
+    margin: 40px auto 100px;
+    padding: 0;
+    /* 全体背景を透明にしてパンダを出す */
+    background: transparent !important; 
+    box-shadow: none !important;
+    position: relative;
+    z-index: 10;
+}
+
+/* テーブルを独立したカードの集合体に変える */
+.schedule-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 20px; /* カード同士の隙間 */
+    background: transparent !important;
+}
+
+.schedule-table tr {
+    /* 各行を白いカードにする */
+    background: rgba(255, 255, 255, 0.98) !important; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.schedule-table tr:hover {
+    transform: translateY(-5px); /* 少し浮かせる演出 */
+}
+
+.schedule-table td {
+    padding: 25px 20px;
+    border: none;
+    color: #333;
+    vertical-align: middle;
+}
+
+/* 日付バッジ（カードの左端） */
+/* 土曜日の日付背景（少し明るい青など） */
+.td-date.sat {
+    background: #0055aa !important; /* 通常のチームブルーより少し明るい青 */
+    color: #ffffff !important;
+}
+
+/* 日曜日・祝日の日付背景（チームレッドを活用） */
+.td-date.sun {
+    background: #cc0000 !important; /* チームレッド、または鮮やかな赤 */
+    color: #ffffff !important;
+}
+
+/* 曜日の文字(dow)も、白背景に馴染むよう調整 */
+.td-date.sat .dow,
+.td-date.sun .dow {
+    opacity: 1;
+    font-weight: bold;
+}
+
+.td-time {
+    font-weight: 700;
+    color: #555 !important;
+    width: 130px;
+}
+
+.td-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #003366 !important;
+}
+
+.td-location {
+    border-radius: 0 18px 18px 0;
+    color: #666 !important;
+}
+
+/* 3. カレンダー表示形式（CALENDAR VIEW） */
+.calendar-wrapper {
+    background: #fcfcfc;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+    border: 1px solid #eee;
+    width: 100%;
+}
+
+.calendar-header-deco {
+    background: #003366;
+    color: #fff;
+    padding: 18px 30px;
+    font-weight: 800;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.calendar-iframe-container {
+    padding: 30px;
+    background: #fff;
+}
+
+.calendar-iframe-container iframe {
+    width: 100%;
+    height: 800px;
+    border: none;
+    border-radius: 12px;
+}
+
+/* --- 共通：曜日(dow)のスタイル --- */
+.dow {
+    font-size: 0.7em;
+    margin-left: 3px;
+    opacity: 0.8;
+}
+
+/* --- 予定がない日のデザイン（控えめにする） --- */
+.no-event {
+    background: rgba(255, 255, 255, 0.4) !important; /* 透けさせて背景のパンダを見せる */
+    opacity: 0.6;
+}
+.blanck-text {
+    color: #ccc;
+    font-weight: normal !important;
+}
+
+/* 5. レスポンシブ調整（スマホ・タブレット用） */
+/* 5. レスポンシブ調整（スマホ用タイト表示） */
+@media (max-width: 1024px) {
+    .schedule-content.container {
+        width: 98%; /* 画面端まで広げる */
+        margin-top: 10px;
+        padding: 5px;
+    }
+
+    /* テーブルをブロック化せず、シンプルな横一行リストに調整 */
+    .schedule-table {
+        border-spacing: 0 4px; /* 予定同士の隙間を最小限に */
+    }
+
+    .schedule-table tr {
+        background: rgba(255, 255, 255, 0.98) !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* 影を薄くして圧迫感を減らす */
+    }
+
+    .schedule-table td {
+        padding: 10px 8px; /* 上下左右の余白を大幅カット */
+        font-size: 0.85rem; /* 文字を少し小さく */
+    }
+
+    /* 日付バッジをスリム化 */
+    .td-date {
+        width: 55px !important; /* 横幅を細く */
+        font-size: 1rem !important; /* 文字を凝縮 */
+        padding: 8px !important;
+        border-radius: 8px 0 0 8px;
+    }
+
+    .td-time {
+        width: 70px !important;
+        padding-right: 0 !important;
+        font-weight: normal;
+    }
+
+    .td-title {
+        font-weight: 800;
+        padding-left: 5px !important;
+        white-space: nowrap; /* 長いタイトルを1行に収める */
+        overflow: hidden;
+        text-overflow: ellipsis; /* はみ出た分を「...」にする */
+        max-width: 120px;
+    }
+
+    .td-location {
+        font-size: 0.75rem;
+        color: #888 !important;
+        text-align: right;
+        padding-left: 0 !important;
+        border-radius: 0 8px 8px 0;
     }
 }
 
-/*-------------------- gear cost section --------------------*/
+/*--------------------------- schedule section ---------------------------*/

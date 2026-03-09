@@ -38,93 +38,182 @@
 </header>
 
 <main>
+    <div class="lang-switch-container container">
+        <div class="lang-switch">
+            <button onclick="switchLanguage('ja')" id="btn-ja" class="active">JP</button>
+            <button onclick="switchLanguage('en')" id="btn-en">EN</button>
+        </div>
+    </div>
+
     <section class="join-hero">
         <div class="color-stripe stripe-blue"></div>
         <div class="color-stripe stripe-red"></div>
         <div class="container hero-content">
-            <span class="sub-title">Join Our Team</span>
-            <h1 class="main-title">体験参加・見学のご案内</h1>
-            <p class="lead-text">白金FCでは活動の見学・体験参加を随時受け付けております。</p>
+            <div class="lang-ja">
+                <span class="sub-title">Join Our Team</span>
+                <h1 class="main-title">体験参加・見学のご案内</h1>
+                <p class="lead-text">白金FCでは活動の見学・体験参加を随時受け付けております。</p>
+            </div>
+            <div class="lang-en">
+                <span class="sub-title">Join Our Team</span>
+                <h1 class="main-title">Trial Session & Visit Guide</h1>
+                <p class="lead-text">Shirogane FC welcomes visitors and trial participants at any time.</p>
+            </div>
         </div>
     </section>
 
     <div class="container join-content">
         <section class="info-block fade-in">
-            <h2 class="block-title">参加方法 <span>How to Join</span></h2>
+            <div class="lang-ja"><h2 class="block-title">参加方法 <span>How to Join</span></h2></div>
+            <div class="lang-en"><h2 class="block-title">How to Join <span>Registration</span></h2></div>
+            
             <div class="step-grid">
                 <div class="step-item">
                     <span class="step-num">01</span>
-                    <h3>Webから</h3>
-                    <p>当HPトップ画面「チーム問合せ」よりお問い合わせ下さい。</p>
+                    <div class="lang-ja">
+                        <h3>Webから</h3>
+                        <p>当HPトップ画面「チーム問合せ」よりお問い合わせ下さい。</p>
+                    </div>
+                    <div class="lang-en">
+                        <h3>Via Website</h3>
+                        <p>Please contact us through the "Contact Us" form on our homepage.</p>
+                    </div>
                 </div>
                 <div class="step-item">
                     <span class="step-num">02</span>
-                    <h3>口頭でお申し込み</h3>
-                    <p>お知り合いのFC会員を通じてお申し込みいただけます。</p>
+                    <div class="lang-ja">
+                        <h3>口頭でお申し込み</h3>
+                        <p>お知り合いのFC会員を通じてお申し込みいただけます。</p>
+                    </div>
+                    <div class="lang-en">
+                        <h3>In Person</h3>
+                        <p>You can apply through any current Shirogane FC member you know.</p>
+                    </div>
                 </div>
                 <div class="step-item">
                     <span class="step-num">03</span>
-                    <h3>直接グラウンドへ</h3>
-                    <p>直接、白金小グラウンドに来て頂いても大丈夫です。</p>
+                    <h3>Directly</h3>
+                    <div class="lang-ja">
+                        <p>直接、白金小グラウンドに来て頂いても大丈夫です。</p>
+                    </div>
+                    <div class="lang-en">
+                        <p>You are welcome to come directly to the Shirogane Elementary School field.</p>
+                    </div>
                 </div>
             </div>
-            <p class="note-text">※遠征試合等で不在の日もあります。チームスケジュールの<strong>”通常練習”</strong>の日にお待ちしております。</p>
+            <div class="lang-ja">
+                <p class="note-text">※遠征試合等で不在の日もあります。チームスケジュールの<strong>”通常練習”</strong>の日にお待ちしております。</p>
+            </div>
+            <div class="lang-en">
+                <p class="note-text">*We may be away for matches. Please check the schedule for <strong>"Regular Practice"</strong> days.</p>
+            </div>
         </section>
 
         <div class="flex-row fade-in">
             <section class="glass-card">
-                <h3>費用 <span>Cost</span></h3>
+                <div class="lang-ja"><h3>費用 <span>Cost</span></h3></div>
+                <div class="lang-en"><h3>Cost <span>Fees</span></h3></div>
+                
                 <div class="cost-highlight">
-                    <p class="big-text">体験参加 <strong>無料</strong></p>
-                    <p>最長で1ヶ月程度、無料で体験可能です。</p>
+                    <div class="lang-ja">
+                        <p class="big-text">体験参加 <strong>無料</strong></p>
+                        <p>最長で1ヶ月程度、無料で体験可能です。</p>
+                    </div>
+                    <div class="lang-en">
+                        <p class="big-text">Trial Session <strong>Free</strong></p>
+                        <p>You can try out for free for up to approximately one month.</p>
+                    </div>
                 </div>
                 <ul class="cost-list">
-                    <li>道具貸し出し <span>無料</span></li>
-                    <li>入会費・年会費 <span>無料</span></li>
-                    <li>月会費 <span>1,500円</span></li>
-                    <li>スポーツ保険 <span>800円/年</span></li>
-                    <li>選手登録費 <span>800円/年</span></li>
+                    <div class="lang-ja">
+                        <li>道具貸し出し <span>無料</span></li>
+                        <li>入会費・年会費 <span>無料</span></li>
+                        <li>月会費 <span>1,500円</span></li>
+                        <li>スポーツ保険 <span>800円/年</span></li>
+                        <li>選手登録費 <span>800円/年</span></li>
+                    </div>
+                    <div class="lang-en">
+                        <li>Equipment Rental <span>Free</span></li>
+                        <li>Admission/Annual Fee <span>Free</span></li>
+                        <li>Monthly Fee <span>1,500 JPY</span></li>
+                        <li>Sports Insurance <span>800 JPY/year</span></li>
+                        <li>Registration Fee <span>800 JPY/year</span></li>
+                    </div>
                 </ul>
             </section>
 
             <section class="glass-card">
-                <h3>体験時の持ち物 <span>Items</span></h3>
+                <div class="lang-ja"><h3>体験時の持ち物 <span>Items</span></h3></div>
+                <div class="lang-en"><h3>What to Bring <span>Items</span></h3></div>
+                
                 <ul class="item-tags">
-                    <li>運動のできる服装</li>
-                    <li>運動靴</li>
-                    <li>飲み物</li>
-                    <li>タオル</li>
+                    <div class="lang-ja">
+                        <li>運動のできる服装</li>
+                        <li>運動靴</li>
+                        <li>飲み物</li>
+                        <li>タオル</li>
+                    </div>
+                    <div class="lang-en">
+                        <li>Sports wear</li>
+                        <li>Athletic shoes</li>
+                        <li>Drink</li>
+                        <li>Towel</li>
+                    </div>
                 </ul>
-                <p class="item-note">※サッカー道具は全て入会後の購入で問題ありません。<br>公園に遊びに行く感覚で、水筒とタオルだけ持って来てください。</p>
+                <div class="lang-ja">
+                    <p class="item-note">※サッカー道具は全て入会後の購入で問題ありません。<br>公園に遊びに行く感覚で、水筒とタオルだけ持って来てください。</p>
+                </div>
+                <div class="lang-en">
+                    <p class="item-note">*No need to buy soccer gear until after joining.<br>Feel free to come as if playing at the park with just a water bottle and towel.</p>
+                </div>
             </section>
         </div>
 
         <section class="info-block schedule-block fade-in">
-            <h2 class="block-title">活動スケジュール <span>Activity</span></h2>
+            <div class="lang-ja"><h2 class="block-title">活動スケジュール <span>Activity</span></h2></div>
+            <div class="lang-en"><h2 class="block-title">Activity Schedule <span>Practice</span></h2></div>
+            
             <div class="schedule-detail">
                 <div class="sch-group">
-                    <h4><i class="fas fa-map-marker-alt"></i> 白金小グラウンド（土日祝）</h4>
-                    <p>年中〜2年生：9:00〜11:00 / 3〜6年生：9:00〜11:30</p>
+                    <div class="lang-ja"><h4><i class="fas fa-map-marker-alt"></i> 白金小グラウンド（土日祝）</h4></div>
+                    <div class="lang-en"><h4><i class="fas fa-map-marker-alt"></i> Shirogane ES Field (Sat/Sun/Holidays)</h4></div>
+                    <p>Pre-K - 2nd: 9:00-11:00 / 3rd - 6th: 9:00-11:30</p>
                 </div>
                 <div class="sch-group">
-                    <h4><i class="fas fa-university"></i> 白金小体育館（火曜）</h4>
-                    <p>4〜6年生：17:30〜19:00</p>
+                    <div class="lang-ja"><h4><i class="fas fa-university"></i> 白金小体育館（火曜）</h4></div>
+                    <div class="lang-en"><h4><i class="fas fa-university"></i> Shirogane ES Gym (Tuesdays)</h4></div>
+                    <p>4th - 6th: 17:30-19:00</p>
                 </div>
             </div>
             <div class="activity-list">
-                <p>②年間を通じて学年毎に練習試合・招待大会・公式大会に参加。高学年は年1回、1泊2日の県内合宿大会があります。</p>
-                <p>③Xmas会、6年生を送る会、親子サッカーなど、季節毎のお楽しみ会も開催しています。</p>
+                <div class="lang-ja">
+                    <p>②年間を通じて学年毎に練習試合・招待大会・公式大会に参加。高学年は年1回、1泊2日の県内合宿大会があります。</p>
+                    <p>③Xmas会、6年生を送る会、親子サッカーなど、季節毎のお楽しみ会も開催しています。</p>
+                </div>
+                <div class="lang-en">
+                    <p>2. We participate in matches and tournaments throughout the year. Upper grades have a 2-day training camp once a year.</p>
+                    <p>3. We hold seasonal events such as Christmas parties, farewell parties for 6th graders, and family soccer days.</p>
+                </div>
             </div>
         </section>
 
         <section class="footer-info fade-in">
             <div class="badge-row">
-                <span class="badge">所属小学校は問いません<br>※他校からも在籍中</span>
-                <span class="badge">女子選手も入会可能<br>※23年4月現在2名在籍</span>
-                <span class="badge">未就学児も入会可能<br>※23年4月現在1名在籍</span>
+                <div class="lang-ja">
+                    <span class="badge">所属小学校は問いません</span>
+                    <span class="badge">女子選手も入会可能 (2名在籍)</span>
+                    <span class="badge">未就学児も入会可能 (1名在籍)</span>
+                </div>
+                </div>
+                <div class="lang-en">
+                    <span class="badge">Open to students from any school</span>
+                    <span class="badge">Girls are welcome (2 enrolled as of 4/23)</span>
+                    <span class="badge">Pre-schoolers welcome (1 enrolled as of 4/23)</span>
+                </div>
             </div>
             <div class="insta-invite">
-                <p>最新の活動状況・雰囲気はInstagramで公開中！</p>
+                <div class="lang-ja"><p>最新の活動状況・雰囲気はInstagramで公開中！</p></div>
+                <div class="lang-en"><p>Check our latest activities and atmosphere on Instagram!</p></div>
                 <a href="https://www.instagram.com/shiroganefc_official/" class="insta-btn" target="_blank">
                     <i class="fab fa-instagram"></i> 白金FC Instagram
                 </a>
@@ -139,11 +228,14 @@
                 <div class="contact-info">
                     <div class="info-box">
                         <h3>白金FC / SHIROGANE FC</h3>
-                        <p class="info-lead">体験・見学のお申し込みはこちらから。</p>
+                        <div class="lang-ja"><p class="info-lead">体験・見学のお申し込みはこちらから。</p></div>
+                        <div class="lang-en"><p class="info-lead">Sign up for trial sessions or visits here.</p></div>
+                        
                         <div class="location-details">
                             <div class="detail-item">
                                 <span class="detail-label">ACTIVITY BASE</span>
-                                <p>千葉県市原市（市原市立白金小学校グラウンド 他）</p>
+                                <div class="lang-ja"><p>千葉県市原市（市原市立白金小学校グラウンド 他）</p></div>
+                                <div class="lang-en"><p>Ichihara City, Chiba (Shirogane ES Field, etc.)</p></div>
                             </div>
                             <div class="map-container">
                                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3251.482811342654!2d140.08940827627448!3d35.4173859441113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601878d655f4581f%3A0x633d71249b6574f2!2z5biC5Y6f5biC56uL55m96YeR5bCP5a2m5qCh!5e0!3m2!1sja!2sjp!4v1710000000000!5m2!1sja!2sjp" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
@@ -154,14 +246,17 @@
                 <div class="form-container">
                     <form id="contact-form">
                         <div class="form-group">
-                            <label for="name">お名前 <span class="required">必須</span></label>
-                            <input type="text" id="name" name="お名前" placeholder="山田 太郎" required>
+                            <div class="lang-ja"><label for="name">お名前 <span class="required">必須</span></label></div>
+                            <div class="lang-en"><label for="name">Name <span class="required">Required</span></label></div>
+                            <input type="text" id="name" name="お名前" placeholder="Yamada Taro" required>
                         </div>
                         <div class="form-group">
-                            <label for="message">お問い合わせ内容 <span class="required">必須</span></label>
-                            <textarea id="message" name="お問い合わせ内容" rows="6" placeholder="練習体験を希望します。○年生の男子です。" required></textarea>
+                            <div class="lang-ja"><label for="message">お問い合わせ内容 <span class="required">必須</span></label></div>
+                            <div class="lang-en"><label for="message">Message <span class="required">Required</span></label></div>
+                            <textarea id="message" name="お問い合わせ内容" rows="6" placeholder="I'd like to join a trial session..." required></textarea>
                         </div>
-                        <button type="submit" id="submit-btn" class="submit-btn">内容を送信する</button>
+                        <div class="lang-ja"><button type="submit" id="submit-btn" class="submit-btn">内容を送信する</button></div>
+                        <div class="lang-en"><button type="submit" id="submit-btn-en" class="submit-btn">Send Message</button></div>
                         <p id="form-status" class="form-status"></p>
                     </form>
                 </div>

@@ -40,14 +40,28 @@
 <main>
 
 <main>
+    <div class="lang-switch-container container">
+        <div class="lang-switch">
+            <button onclick="switchLanguage('ja')" id="btn-ja" class="active">JP</button>
+            <button onclick="switchLanguage('en')" id="btn-en">EN</button>
+        </div>
+    </div>
+
     <section class="parents-hero">
         <div class="color-stripe stripe-blue"></div>
         <div class="color-stripe stripe-red"></div>
         
         <div class="container hero-content">
-            <span class="sub-title">Message to Parents</span>
-            <h1 class="main-title">はじめてサッカーを<br>はじめるお子様の保護者様へ</h1>
-            <p class="lead-text">焦らず、ゆっくり。子供たちの成長を見守る、私たちの想いです。</p>
+            <div class="lang-ja">
+                <span class="sub-title">Message to Parents</span>
+                <h1 class="main-title">はじめてサッカーを<br>はじめるお子様の保護者様へ</h1>
+                <p class="lead-text">焦らず、ゆっくり。子供たちの成長を見守る、私たちの想いです。</p>
+            </div>
+            <div class="lang-en" style="display: none;">
+                <span class="sub-title">Message to Parents</span>
+                <h1 class="main-title">To Parents of Children<br>Starting Soccer for the First Time</h1>
+                <p class="lead-text">Take it slow. Our philosophy is to watch over children's growth patiently.</p>
+            </div>
         </div>
     </section>
 
@@ -55,43 +69,75 @@
 
         <section class="message-block fade-in">
             <div class="icon-wrap">
-                <i class="fas fa-seedling"></i> </div>
+                <i class="fas fa-seedling"></i> 
+            </div>
             <div class="text-wrap">
-                <p>初めてサッカーを始めたとき、子供はなかなか練習に入っていけません。<br>
-                なんか怖くてやろうとしない、よくわからずボールを蹴ってすぐ飽きて遊びに行く。<br>
-                <strong>みんなここから始まります。</strong></p>
+                <div class="lang-ja">
+                    <p>初めてサッカーを始めたとき、子供はなかなか練習に入っていけません。<br>
+                    なんか怖くてやろうとしない、よくわからずボールを蹴ってすぐ飽きて遊びに行く。<br>
+                    <strong>みんなここから始まります。</strong></p>
+                </div>
+                <div class="lang-en" style="display: none;">
+                    <p>When children first start soccer, they often struggle to join the practice right away.<br>
+                    They might be scared, or they might kick the ball a bit and then get bored and go play elsewhere.<br>
+                    <strong>Everyone starts from here.</strong></p>
+                </div>
             </div>
         </section>
 
         <section class="message-block inverse fade-in">
             <div class="text-wrap bg-light">
-                <p>保護者の方はチームやコーチに迷惑かけてるんじゃないか？<br>
-                うちの子が周りの子に迷惑かけてるんじゃないか？と心配になるかもしれません。</p>
-                <p class="highlight-text">実際低学年の指導は難しく苦労はありますが、コーチ達も「まぁそんなもんだよね」と理解しているし、普通のことなので大丈夫です。あまり気にしないで下さい。</p>
+                <div class="lang-ja">
+                    <p>保護者の方はチームやコーチに迷惑かけてるんじゃないか？<br>
+                    うちの子が周りの子に迷惑かけてるんじゃないか？と心配になるかもしれません。</p>
+                    <p class="highlight-text">実際低学年の指導は難しく苦労はありますが、コーチ達も「まぁそんなもんだよね」と理解しているし、普通のことなので大丈夫です。あまり気にしないで下さい。</p>
+                </div>
+                <div class="lang-en" style="display: none;">
+                    <p>Parents often worry if they are being a burden to the team or coaches, or if their child is bothering others.</p>
+                    <p class="highlight-text">While teaching younger children can be challenging, our coaches understand that "it's just how they are." It's perfectly normal, so please don't worry too much.</p>
+                </div>
             </div>
             <div class="icon-wrap">
-                <i class="fas fa-hands-helping"></i> </div>
+                <i class="fas fa-hands-helping"></i> 
+            </div>
         </section>
 
         <section class="message-block fade-in">
             <div class="icon-wrap">
-                <i class="fas fa-running"></i> </div>
+                <i class="fas fa-running"></i> 
+            </div>
             <div class="text-wrap">
-                <p>サッカーにのめり込み、大人のイメージする当たり前の『グラウンドに来てサッカーの練習をし挨拶して帰る』という状態になるまで2年程かかります。</p>
-                <p>サッカーを始めて、選手が最初に習得するスキルは<strong>『集団の中に身を置く』</strong>です。<br>
-                虫を捕まえたり、座って喋っていたり、遊具に行ってしまったりしますが普通のことなので全然大丈夫です。</p>
-                <p class="brilliant-box">別に練習しなくても大丈夫です。<br>
-                グラウンドに来て、仲間とともに同じ時間を過ごすということができていれば、それだけで確実に成長しています。</p>
+                <div class="lang-ja">
+                    <p>サッカーにのめり込み、大人のイメージする当たり前の『グラウンドに来てサッカーの練習をし挨拶して帰る』という状態になるまで2年程かかります。</p>
+                    <p>サッカーを始めて、選手が最初に習得するスキルは<strong>『集団の中に身を置く』</strong>です。<br>
+                    虫を捕まえたり、座って喋っていたり、遊具に行ってしまったりしますが普通のことなので全然大丈夫です。</p>
+                    <p class="brilliant-box">別に練習しなくても大丈夫です。<br>
+                    グラウンドに来て、仲間とともに同じ時間を過ごすということができていれば、それだけで確実に成長しています。</p>
+                </div>
+                <div class="lang-en" style="display: none;">
+                    <p>It takes about two years for a child to get into the routine of "coming to the field, practicing, greeting everyone, and going home."</p>
+                    <p>The first skill a player learns is <strong>"learning to be part of a group."</strong><br>
+                    It's completely fine if they get distracted by bugs, chat with friends, or wander off to the playground.</p>
+                    <p class="brilliant-box">It's okay even if they don't "practice" at first.<br>
+                    Just being on the field and spending time with teammates is a significant step in their growth.</p>
+                </div>
             </div>
         </section>
 
         <section class="message-block future-block fade-in">
             <div class="container-mini">
                 <div class="icon-main">
-                    <i class="fas fa-chart-line"></i> </div>
-                <p>2年後には当たり前に練習に行くようになり、3年後には進んで自主練とかやり始めます。<br>
-                ちょっと休めと言いたくなるくらい頑張りはじめます。</p>
-                <h3 class="final-message">最初はめちゃくちゃで心配になると思いますが、<br>コーチにまかせて見守っていてください。</h3>
+                    <i class="fas fa-chart-line"></i> 
+                </div>
+                <div class="lang-ja">
+                    <p>2年後には当たり前に練習に行くようになり、3年後には進んで自主練とかやり始めます。<br>
+                    ちょっと休めと言いたくなるくらい頑張りはじめます。</p>
+                    <h3 class="final-message">最初はめちゃくちゃで心配になると思いますが、<br>コーチにまかせて見守っていてください。</h3>
+                </div>
+                <div class="lang-en" style="display: none;">
+                    <p>In two years, they will go to practice naturally. In three years, they will start practicing on their own. They might even work so hard you'll want to tell them to take a break!</p>
+                    <h3 class="final-message">It might seem chaotic at first and you may feel worried, but please trust the coaches and watch over them.</h3>
+                </div>
             </div>
         </section>
 
