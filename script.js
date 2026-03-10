@@ -128,3 +128,49 @@ for (let day = 1; day <= daysInMonth; day++) {
     }
 }
 document.addEventListener('DOMContentLoaded', buildFullMonthSchedule);
+
+
+
+
+//schedule modal
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('schedule-modal');
+    const closeBtn = document.getElementById('modal-close-btn');
+
+    // ★修正ポイント：テーブル全体に対してクリックを監視する（後から追加された行にも対応）
+    document.addEventListener('click', (e) => {
+        // クリックされた要素から、一番近い「tr」を探す
+        const row = e.target.closest('.schedule-table tr');
+        
+        // trが見つかり、かつ「予定がない日（no-event）」でなければ実行
+        if (row && !row.classList.contains('no-event')) {
+            
+            // 行内の各データを取得
+            const dateHtml = row.querySelector('.td-date').innerHTML;
+            const dateClass = row.querySelector('.td-date').className;
+            const time = row.querySelector('.td-time').innerText;
+            const title = row.querySelector('.td-title').innerText;
+            const location = row.querySelector('.td-location').innerText;
+
+            // モーダルへ流し込み
+            const modalDate = document.getElementById('modal-date-badge');
+            modalDate.innerHTML = dateHtml;
+            modalDate.className = dateClass;
+            
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-time').innerText = time;
+            document.getElementById('modal-location').innerText = location;
+
+            // 表示
+            modal.classList.add('active');
+        }
+    });
+
+    // 閉じるボタン
+    closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+
+    // 背景クリックで閉じる
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.classList.remove('active');
+    });
+});

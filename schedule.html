@@ -11,16 +11,14 @@
 <header>
     <nav class="nav-container">
         <button class="mobile-menu-btn" id="mobile-menu-btn">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </button>
 
         <ul class="nav-links nav-left">
-            <li><a href="#" class="active">HOME</a></li>
+            <li><a href="index.html" class="active">HOME</a></li>
             <li><a href="#">ABOUT US</a></li>
             <li><a href="#">TEAMS</a></li>
-            <li><a href="#">SCHEDULE</a></li>
+            <li><a href="schedule.html">SCHEDULE</a></li>
         </ul>
 
         <div class="header-logo">
@@ -29,6 +27,11 @@
         </div>
 
         <ul class="nav-links nav-right">
+            <li class="mobile-only"><a href="index.html" class="active">HOME</a></li>
+            <li class="mobile-only"><a href="#">ABOUT US</a></li>
+            <li class="mobile-only"><a href="#">TEAMS</a></li>
+            <li class="mobile-only"><a href="schedule.html">SCHEDULE</a></li>
+            
             <li><a href="#">COACHES</a></li>
             <li><a href="#">GALLERY</a></li>
             <li><a href="#">NEWS</a></li>
@@ -72,6 +75,35 @@
 </div>
     </div>
 </main>
+
+<div id="schedule-modal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-close" id="modal-close-btn">&times;</button>
+        <div class="modal-header">
+            <div id="modal-date-badge" class="td-date" style="width: auto; display: inline-block; border-radius: 8px; padding: 5px 15px;">3/11(水)</div>
+            <h2 id="modal-title">通常練習</h2>
+        </div>
+        <div class="modal-body">
+            <div class="modal-info-row">
+                <span class="info-label">TIME</span>
+                <p id="modal-time">8:00 ~ 10:00</p>
+            </div>
+            <div class="modal-info-row">
+                <span class="info-label">LOCATION</span>
+                <p id="modal-location">白金小グラウンド</p>
+            </div>
+            <div class="modal-info-row detail-text">
+                <span class="info-label">MESSAGE</span>
+                <p id="modal-message">
+                    体験参加をご希望の方は、運動できる服装・水筒・ボール（お持ちであれば）を持参のうえ、開始10分前までにグラウンドへお越しください。
+                </p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="join_us.html" class="join-btn">体験参加を申し込む</a>
+        </div>
+    </div>
+</div>
 
     <footer class="main-footer">
         <div class="footer-container">

@@ -117,6 +117,35 @@ header {
     color: #fff !important;
 }
 
+/* JOIN US には区切り線を入れない */
+.nav-right li a.join-btn {
+    border-bottom: 2px solid var(--clr-red) !important; /* 1pxの線を上書き */
+}
+
+/*------------------------ PCのヘッダとSFのヘッダの表示切り替え ------------------------*/
+/* PC表示（1025px以上など）の設定に追記 */
+@media screen and (min-width: 993px) {
+    .mobile-only {
+        display: none !important;
+    }
+}
+
+/* スマホ表示（992px以下）の設定を確認・追記 */
+@media screen and (max-width: 992px) {
+    .nav-left {
+        display: none !important; /* 左側メニューを隠す */
+    }
+
+    .nav-right .mobile-only {
+        display: block !important; /* メニュー内のHOME〜SCHEDULEを表示 */
+    }
+    
+    /* 以前設定した JOIN US の枠線修正を維持 */
+    .nav-right li a.join-btn {
+        border-bottom: 2px solid var(--clr-red) !important;
+    }
+}
+
 /* --- ハンバーガーボタン (PCでは隠す) --- */
 .mobile-menu-btn {
     display: none; /* デフォルト非表示 */
@@ -135,62 +164,106 @@ header {
     background-color: var(--clr-red);
     transition: 0.3s;
 }
+/*------------------------ PCのヘッダとSFのヘッダの表示切り替え ------------------------*/
 
 /* ============================================================
    レスポンシブ (992px以下)
    ============================================================ */
-
 @media (max-width: 992px) {
     .nav-container {
-        justify-content: space-between; /* パンダを左、ボタンを右に */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         padding: 15px 20px;
+        width: 100%;
+        /* ヘッダー自体も透過させてヒーローに重ねる場合はここを調整 */
+        position: relative;
+        z-index: 1100;
     }
 
     .header-logo img {
-        width: 55px; /* スマホではロゴを少し小ぶりに */
+        width: 55px;
+    }
+
+    .nav-left {
+        display: none !important;
     }
 
     .mobile-menu-btn {
-        display: flex; /* スマホでボタンを表示 */
+        display: flex;
+        z-index: 1200; /* メニューより上に配置 */
     }
 
-    /* 左右のメニューを統合して隠す */
-    .nav-left, .nav-right {
+    /* 【Gorgeous & Elegant】フルスクリーンメニュー設定 */
+    .nav-right {
         position: fixed;
         top: 0;
-        right: -100%; /* 画面外へ隠す */
-        width: 75%;
+        right: -100%;
+        width: 100vw;
         height: 100vh;
-        background: #fff;
+        /* 背景を透過させ、ヒーローを透かす */
+        background: rgba(255, 255, 255, 0.35); 
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 30px;
-        transition: 0.4s cubic-bezier(0.1, 0.7, 1.0, 0.1);
-        z-index: 1050;
-        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        /* gapを削除し、マージンとボーダーでラインを制御 */
+        gap: 0; 
+        transition: 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+        z-index: 1150;
+        padding-top: 60px; /* パンダ画像のための余白 */
     }
 
-    /* ボタンが押された時にスライドイン */
-    .nav-left.active, .nav-right.active {
+    /* 疑似要素でメニュー最上部にパンダ画像を配置 */
+    .nav-right::before {
+        content: "";
+        display: block;
+        width: 80px;  /* パンダのサイズ調整 */
+        height: 80px;
+        background: url('shirogane_panda.png') no-repeat center center / contain;
+        margin-bottom: 40px;
+    }
+
+    .nav-right.active {
         right: 0;
     }
 
-    /* メニュー内のリンクを大きく */
-    .nav-links a {
-        font-size: 1.2rem;
+    /* メニュー項目とラインの設定 */
+    .nav-right li {
+        width: 80%; /* ラインの長さを調整 */
+        text-align: center;
+        list-style: none;
     }
 
-    /* ハンバーガーボタンのアニメーション (開いた時) */
-    .mobile-menu-btn.open span:nth-child(1) {
-        transform: translateY(9px) rotate(45deg);
+    .nav-right li a {
+        display: block;
+        padding: 15px 0;
+        font-size: 1.2rem;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        color: #333;
+        text-decoration: none;
+        /* 項目間のライン */
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
+        transition: color 0.3s;
     }
-    .mobile-menu-btn.open span:nth-child(2) {
-        opacity: 0;
+
+    /* 最後の項目のラインは消す */
+    .nav-right li:last-child a {
+        border-bottom: none;
     }
-    .mobile-menu-btn.open span:nth-child(3) {
-        transform: translateY(-9px) rotate(-45deg);
+
+    .nav-right .mobile-only {
+        display: block !important;
     }
+
+    /* ハンバーガーボタンのアニメーション */
+    .mobile-menu-btn.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .mobile-menu-btn.open span:nth-child(2) { opacity: 0; }
+    .mobile-menu-btn.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 }
 
 /* === 以下、前回と変更なし === */
@@ -1981,22 +2054,35 @@ body.parents-page::before {
     background: transparent !important;
 }
 
-.schedule-table tr {
-    /* 各行を白いカードにする */
-    background: rgba(255, 255, 255, 0.98) !important; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease;
-}
-
-.schedule-table tr:hover {
-    transform: translateY(-5px); /* 少し浮かせる演出 */
-}
-
+/* 2073行目付近：td の背景色と「太いボーダー」を設定 */
 .schedule-table td {
+    background: rgba(238, 242, 246, 0.98) !important; 
     padding: 25px 20px;
-    border: none;
+    
+    /* ボーダーを 1.5px → 2.5px に太くし、透明度も 0.2 にアップ */
+    border-top: 2.5px solid rgba(0, 51, 102, 0.2);    /* 上側の太線 */
+    border-bottom: 2.5px solid rgba(0, 51, 102, 0.2); /* 下側の太線 */
+    
     color: #333;
     vertical-align: middle;
+}
+
+/* 左端のセル：左側の線を太くし、角丸を維持 */
+.schedule-table td:first-child {
+    border-left: 2.5px solid rgba(0, 51, 102, 0.2);  /* 左側の太線 */
+    border-radius: 12px 0 0 12px;
+}
+
+/* 右端のセル：右側の線を太くし、角丸を維持 */
+.schedule-table td:last-child {
+    border-right: 2.5px solid rgba(0, 51, 102, 0.2); /* 右側の太線 */
+    border-radius: 0 12px 12px 0;
+}
+
+/* ホバー時は枠線の色をさらに濃くして強調 */
+.schedule-table tr:hover td {
+    background: #ffffff !important;
+    border-color: rgba(0, 51, 102, 0.4); /* よりクッキリした紺色に */
 }
 
 /* 日付バッジ（カードの左端） */
@@ -2141,5 +2227,73 @@ body.parents-page::before {
         border-radius: 0 8px 8px 0;
     }
 }
+
+/*-------------------- modal ---------------------*/
+/* モーダル全体のオーバーレイ */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 背景を暗く */
+    backdrop-filter: blur(10px);    /* すりガラス効果 */
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    z-index: 2000;
+}
+
+/* 表示状態 */
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* モーダルの中身（カード） */
+.modal-content {
+    background: #fff;
+    width: 90%;
+    max-width: 500px;
+    padding: 50px 40px 40px;
+    border-radius: 25px;
+    position: relative;
+    transform: scale(0.8) translateY(20px);
+    transition: all 0.5s cubic-bezier(0.17, 0.84, 0.44, 1);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1) translateY(0);
+}
+
+/* 閉じるボタン */
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 2.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.3s;
+}
+.modal-close:hover { color: var(--clr-red); }
+
+/* 内部のデザイン */
+.modal-header { text-align: center; margin-bottom: 30px; }
+#modal-title { font-size: 1.8rem; font-weight: 800; color: #003366; margin-top: 15px; }
+
+.modal-info-row { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+.info-label { font-size: 0.75rem; font-weight: bold; color: var(--clr-blue); letter-spacing: 0.1em; }
+.modal-info-row p { font-size: 1.1rem; font-weight: 600; margin-top: 5px; }
+
+.modal-footer { margin-top: 40px; text-align: center; }
+/*-------------------- modal ---------------------*/
 
 /*--------------------------- schedule section ---------------------------*/
