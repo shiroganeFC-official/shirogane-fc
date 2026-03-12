@@ -2048,7 +2048,7 @@ body.parents-page::before {
 
 /* テーブルを独立したカードの集合体に変える */
 .schedule-table {
-    width: 100%;
+    width: 98%;
     border-collapse: separate;
     border-spacing: 0 20px; /* カード同士の隙間 */
     background: transparent !important;
@@ -2297,3 +2297,83 @@ body.parents-page::before {
 /*-------------------- modal ---------------------*/
 
 /*--------------------------- schedule section ---------------------------*/
+
+
+/*--------------------------- calendar section ----------------------------*/
+/* カレンダー全体の枠 */
+#calendar-grid {
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    margin-top: 10px;
+}
+
+/* 曜日の行 */
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: #003366;
+    color: white;
+}
+.day-name {
+    padding: 10px 0;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* 日付のマス目 */
+.calendar-cells {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+/* 日付のマス目（内容に応じて縦に伸びる設定） */
+.cell {
+    min-height: 100px;
+    height: auto;      /* 内容が増えたら縦に伸びるように変更 */
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+    background: #fff;
+}
+.cell.empty { background: #f9f9f9; }
+
+/* 日付の数字 */
+.day-num {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* カレンダー内のイベント（縦並び・背景なし設定） */
+.cal-event {
+    background: none;      /* 青い背景を削除 */
+    color: inherit;        /* 文字色は各divで指定 */
+    font-size: 0.75rem;
+    padding: 4px 0;        /* 上下に余白 */
+    border-top: 1px dashed #eee; /* 予定ごとの区切り線 */
+    cursor: pointer;
+    white-space: normal;   /* 折り返しを許可 */
+    overflow: visible;
+}
+
+/* 予定が複数ある場合、一番上の境界線は消す */
+.cal-event:first-child {
+    border-top: none;
+}
+
+/* 日曜日の数字を赤く */
+.day-num.sun {
+    color: #ff4d4d;
+}
+
+/* 土曜日の数字を青く */
+.day-num.sat {
+    color: #00bfff;
+}
+
+/* 曜日のバー（日・土）も色を変える場合 */
+.day-name:first-child { color: #ff4d4d; } /* 日曜日 */
+.day-name:last-child { color: #00bfff; }  /* 土曜日 */
+/*--------------------------- calendar section ----------------------------*/
