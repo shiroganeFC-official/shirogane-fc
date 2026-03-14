@@ -52,7 +52,7 @@
 
         <ul class="nav-links nav-left">
             <li><a href="index.html" class="active">HOME</a></li>
-            <li><a href="#">ABOUT US</a></li>
+            <li><a href="team_summary.html">ABOUT US</a></li>
             <li><a href="#">TEAMS</a></li>
             <li><a href="schedule.html">SCHEDULE</a></li>
         </ul>
@@ -64,7 +64,7 @@
 
         <ul class="nav-links nav-right">
             <li class="mobile-only"><a href="index.html" class="active">HOME</a></li>
-            <li class="mobile-only"><a href="#">ABOUT US</a></li>
+            <li class="mobile-only"><a href="team_summary.html">ABOUT US</a></li>
             <li class="mobile-only"><a href="#">TEAMS</a></li>
             <li class="mobile-only"><a href="schedule.html">SCHEDULE</a></li>
             
@@ -82,16 +82,16 @@
 
         <section class="hero">
             <div class="slider">
-                <div class="slide" style="background-image: url('img/image03.jpg');"></div>
+                <div class="slide" style="background-image: url('img/image17.jpg');"></div>
                 <div class="slide" style="background-image: url('img/image08.jpg');"></div>
                 <div class="slide" style="background-image: url('img/image09.jpg');"></div>
-                <div class="slide" style="background-image: url('img/image10.jpg');"></div>
+                <div class="slide" style="background-image: url('img/image18.jpg');"></div>
                 <div class="slide" style="background-image: url('img/image11.jpg');"></div>
                 <div class="slide" style="background-image: url('img/image12.jpg');"></div>
                 <div class="slide" style="background-image: url('img/image14.jpg');"></div>
                 <div class="slide" style="background-image: url('img/image16.jpg');"></div>
-                <div class="slide" style="background-image: url('img/image17.jpg');"></div>
-                <div class="slide" style="background-image: url('img/image18.jpg');"></div>
+                <div class="slide" style="background-image: url('img/image03.jpg');"></div>
+                <div class="slide" style="background-image: url('img/image10.jpg');"></div>
             </div>
             <div class="hero-content">
                 <div class="hero-logo-unit">
@@ -145,33 +145,35 @@
 <section class="news-schedule-section container fade-in">
     <div class="section-header">
         <h2 class="section-title">NEWS & <span class="txt-red">SCHEDULE</span></h2>
-        <p class="section-lead">体験会などのお知らせはこちらへアップします。ご確認ください。</p>
+        <div class="schedule-info-banner">
+            <p>体験会などの最新情報は、こちらへアップします。ぜひご確認ください。</p>
+        </div>
     </div>
 
     <div class="news-grid">
         <div class="flyer-container">
-            <div class="flyer-frame">
-                <img src="assets/img/flyer_sample.png" alt="最新の体験会チラシ" class="flyer-img">
-                <div class="flyer-overlay">
-                    <a href="assets/pdf/flyer_latest.pdf" target="_blank" class="download-btn-mini">
-                        <i class="fas fa-file-pdf"></i> A4チラシを拡大・保存
-                    </a>
+            <div class="flyer-frame" id="flyerTrigger">
+                <img src="img/updates/202505 trial session.png" alt="最新の体験会チラシ" class="flyer-img">
                 </div>
-            </div>
         </div>
 
-        <div class="schedule-table-container">
-            <h3 class="table-title"><i class="far fa-calendar-alt"></i> Annual Calendar</h3>
-            <table class="annual-table">
-                <tr><th>4月 - 6月</th><td>入会受付 / 春季区大会 / 親子サッカー</td></tr>
-                <tr><th>7月 - 9月</th><td>夏季合宿（高学年） / 市原市招待大会 / 練習試合</td></tr>
-                <tr><th>10月 - 12月</th><td>秋季区大会 / Xmas会 / 蹴り納め</td></tr>
-                <tr><th>1月 - 3月</th><td>初蹴り / 新年度体験会 / 6年生を送る会</td></tr>
-            </table>
-            <div class="schedule-note">
-                <p>※詳細な日程は「SCHEDULE」ページまたはInstagramにて随時更新いたします。</p>
-            </div>
-        </div>
+
+
+<div class="schedule-table-container">
+    <h3 class="table-title">
+        <i class="far fa-calendar-check"></i> 
+        体験会情報 <span style="font-size: 0.8em; font-weight: normal; margin-left: 5px;">/ Trial Session</span>
+    </h3>
+    <table class="annual-table">
+        <tr><th>2025年 5/18(日)</th><td>体験会を実施いたしました</td></tr>
+        <tr><th>2024年 5/19(日)</th><td>体験会を実施いたしました</td></tr>
+        <tr><th>2023年 5/21(日)</th><td>体験会を実施いたしました</td></tr>
+        <tr><th>2022年 5/15(日)</th><td>体験会を実施いたしました</td></tr>
+    </table>
+    <div class="schedule-note">
+        <p>※詳細な日程は「SCHEDULE」ページ<br>またはInstagramにて随時更新いたします。</p>
+    </div>
+</div>
     </div>
 </section>
 
@@ -204,7 +206,10 @@
             <a href="https://momonga-net.com/football/hp/shirogane" target="_blank" class="link-card card-official">
                 <div class="official-frame-panel" style="background-image: url('img/image20.jpg');">
                     <div class="visual-overlay">
-                        <span class="view-text">OFFICIAL SITE</span>
+                        <div class="official-site-button">
+                            <span>OFFICIAL SITE</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
                     </div>
                 </div>
             </a>
@@ -300,9 +305,9 @@
             
             <div class="map-container">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3251.644119330105!2d140.10651917633215!3d35.539064137541624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6022830f06f7902d%3A0x673c090a2182069b!2z5biC5Y6f5biC56uL55m96YeR5bCP5a2m5qCh!5e0!3m2!1sja!2sjp!4v1710000000000!5m2!1sja!2sjp" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3251.2464197365694!2d140.09880811525208!3d35.52654398022871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018705b64c63397%3A0xc3b57361a473f75d!2z5biC5Y6f5biC56uL55m96YeR5bCP5a2m5qCh!5e0!3m2!1sja!2sjp!4v1710400000000!5m2!1sja!2sjp" 
                     width="100%" 
-                    height="200" 
+                    height="250" 
                     style="border:0;" 
                     allowfullscreen="" 
                     loading="lazy" 
@@ -372,6 +377,12 @@
             <p>&copy; 2026 SHIROGANE FC / SHIROGANE FC. All Rights Reserved.</p>
         </div>
     </footer>
+
+        <div id="imageModal" class="modal">
+            <span class="modal-close">&times;</span>
+            <img class="modal-content" id="modalImg">
+        </div>
+
     <script src="script.js"></script>
 </body>
 </html>

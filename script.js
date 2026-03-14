@@ -270,3 +270,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.getElementById('modal-close-btn');
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
 });
+
+function switchLanguage(lang) {
+    const btnJa = document.getElementById('btn-ja');
+    const btnEn = document.getElementById('btn-en');
+    if (!btnJa || !btnEn) return;
+
+    // 1. ボタンの活性化状態を切り替え
+    if (lang === 'ja') {
+        btnJa.classList.add('active');
+        btnEn.classList.remove('active');
+    } else {
+        btnEn.classList.add('active');
+        btnJa.classList.remove('active');
+    }
+
+    // 2. HTML内の lang-ja と lang-en クラスを持つ要素をすべて取得
+    const jaElements = document.querySelectorAll('.lang-ja');
+    const enElements = document.querySelectorAll('.lang-en');
+
+    // 3. 表示・非表示を切り替え
+    if (lang === 'ja') {
+        jaElements.forEach(el => el.style.display = 'block');
+        enElements.forEach(el => el.style.display = 'none');
+    } else {
+        jaElements.forEach(el => el.style.display = 'none');
+        enElements.forEach(el => el.style.display = 'block');
+    }
+}
+
+
+/*------------------------- trial session modal --------------------------*/
+const modal = document.getElementById("imageModal");
+const flyerTrigger = document.getElementById("flyerTrigger");
+const modalImg = document.getElementById("modalImg");
+const closeBtn = document.getElementsByClassName("modal-close")[0];
+
+// クリックでモーダル表示
+flyerTrigger.onclick = function() {
+    modal.style.display = "flex";
+    modal.style.alignItems = "center";
+    // 表示中の画像のソースをモーダルにコピー
+    modalImg.src = this.querySelector('img').src; 
+}
+
+// 閉じるボタンか、背景クリックで閉じる
+modal.onclick = function(e) {
+    if (e.target !== modalImg) {
+        modal.style.display = "none";
+    }
+}
+/*------------------------- trial session modal --------------------------*/

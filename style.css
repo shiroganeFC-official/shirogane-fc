@@ -351,6 +351,8 @@ header {
         transform: translateY(0);
     }
 }
+
+
 /*--------------------------- hero text ---------------------------------*/
 
 /* カードセクション */
@@ -527,43 +529,152 @@ header {
 }
 
 /* 年間スケジュール表 */
+/* 親要素のグリッド自体を中央に集約する */
+.news-grid {
+    display: flex;
+    justify-content: center; /* 中身を中央寄せにする */
+    align-items: flex-start; /* 高さを上に合わせる */
+    gap: 40px;               /* フライヤーと表の間の距離（お好みで調整） */
+    max-width: 1000px;       /* 全体の最大幅を制限して中央に寄せる */
+    margin: 0 auto;          /* 外側の余白をautoにして画面中央へ */
+    padding: 0 20px;
+}
+
+/* フライヤーコンテナの幅固定 */
+.flyer-container {
+    flex: 0 0 400px;         /* 幅を400pxに固定して勝手に広がらないようにする */
+}
+
+/* 右側のテーブルコンテナ */
 .schedule-table-container {
-    background: #f0f7ff; /* 費用ページの見出しと統一感を出す薄青 */
-    padding: 35px;
-    border-radius: 20px;
-    border-left: 6px solid var(--clr-red); /* アクセントの赤 */
+    flex: 1;                 /* 残りのスペースを使う */
+    max-width: 480px;        /* 広がりすぎないように制限 */
+    /* margin-left: auto; は削除するか、そのままでもOK */
+    padding: 30px;
+    background-color: #f4faff;
+    border-radius: 15px;
 }
 
-.table-title {
-    color: var(--clr-blue);
-    margin-bottom: 25px;
-    font-size: 1.5rem;
+/* モバイル対応（縦並びにする） */
+@media (max-width: 850px) {
+    .news-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    .flyer-container {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 400px;
+    }
 }
-
-.annual-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
+/* 体験会実績テーブルの調整 */
 .annual-table th {
-    width: 30%;
-    text-align: left;
-    padding: 15px 0;
-    color: var(--clr-blue);
-    border-bottom: 1px solid rgba(0, 51, 102, 0.1);
-    font-size: 1rem;
+    white-space: nowrap; /* 日付が改行されないように */
+    color: #00bfff;     /* 日付をSHIROGANEブルーに */
+    width: 140px;       /* 日付部分の幅を固定して揃える */
 }
 
 .annual-table td {
-    padding: 15px 0;
-    border-bottom: 1px solid rgba(0, 51, 102, 0.1);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-weight: 500;
+    color: #333;
 }
 
-@media (max-width: 992px) {
-    .news-grid { grid-template-columns: 1fr; gap: 60px; }
+/* 1行目（最新）を少しだけ強調する */
+.annual-table tr:first-child td {
+    color: #000;
+    font-weight: 700;
 }
+
+/* お知らせバナーのデザイン */
+/* お知らせバナー全体のデザイン */
+.schedule-info-banner {
+    width: 100%;             /* セクション幅いっぱいに伸ばす */
+    background-color: #ffffff; /* 背景を白にしてごちゃつきを消す */
+    border-top: 1px solid #eee;    /* 上下に薄い線を引く（お好みで） */
+    border-bottom: 1px solid #eee; 
+    padding: 20px 0;          /* 上下に余裕を持たせる */
+    margin: 20px 0 30px 0;    /* タイトルとグリッドとの間隔 */
+    display: block;          /* 横いっぱいに広げる */
+}
+
+/* 中のテキストのデザイン */
+.schedule-info-banner p {
+    margin: 0;
+    color: #003366;           /* 可読性重視の濃い青 */
+    font-weight: 700;         /* 太め */
+    font-size: 1rem;          /* 標準サイズ */
+    letter-spacing: 0.03em;   /* モダンな印象に */
+    line-height: 1.6;
+    max-width: 1200px;        /* 文字自体が横に広がりすぎないように制限 */
+    margin: 0 auto;           /* 中央寄せ */
+    padding: 0 5%;            /* 両端に少し余白を作る */
+}
+
+/*-------------------------- modal ---------------------------*/
+/* 画像にマウスを乗せた時にクリックできることを示す */
+#flyerTrigger {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+#flyerTrigger:hover {
+    transform: scale(1.02); /* 少しだけ浮かせる演出 */
+}
+
+/* モーダル本体 */
+/* モーダル内の画像を最大限大きく表示 */
+.modal-content {
+    margin: auto;
+    display: block;
+    
+    /* 画面幅に対してのサイズ指定を強化 */
+    width: auto;         /* 横幅は自動計算 */
+    max-width: 95vw;     /* 画面の横幅(viewport width)の95%まで */
+    max-height: 90vh;    /* 画面の高さ(viewport height)の90%まで */
+    
+    object-fit: contain; /* アスペクト比を維持して収める */
+    
+    /* 白い枠線が邪魔な場合は 0 にしてください */
+    padding: 10px;       /* 枠の内側の余白 */
+    background: #fff;    /* 枠の色 */
+    border-radius: 10px;
+    
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    animation: zoom 0.3s ease-out;
+}
+
+/* モーダル背景の配置を確実に中央にする */
+/* モーダル背景の配置を確実に中央にする */
+.modal {
+    position: fixed;    /* 画面に対して固定 */
+    z-index: 9999;      /* 最前面に */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    
+    /* 中央揃えの設定（JSで表示する際に有効になります） */
+    display: none;      /* ★ここが最重要：初期状態は必ず none にする */
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes zoom {
+    from {transform: scale(0.7); opacity: 0;}
+    to {transform: scale(1); opacity: 1;}
+}
+
+/* 閉じるボタン */
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+/*-------------------------- modal ---------------------------*/
 /*--------------------- NEWS & SCHEDULE SECTION ----------------------------------------*/
 
 /*-------------------- 外部リンクセクション --------------------*/
@@ -772,6 +883,54 @@ header {
     }
 }
 
+
+/* オーバーレイを少し暗くしてボタンを際立たせる */
+.visual-overlay {
+    background: rgba(0, 0, 0, 0.2); /* 最初はうっすら */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+/* カード全体にホバーした時、背景をもう少し暗く */
+.link-card:hover .visual-overlay {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* OFFICIAL SITE ボタンのデザイン */
+.official-site-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 25px;
+    background: #00bfff; /* SHIROGANEブルー */
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ホバー時にボタンを強調 */
+.link-card:hover .official-site-button {
+    transform: scale(1.1);
+    background: #00ccff;
+    box-shadow: 0 6px 20px rgba(0, 191, 255, 0.5);
+}
+
+.official-site-button i {
+    font-size: 0.8rem;
+}
+
+/* カード（aタグ）自体にかかっている線を消す */
+.link-card {
+    text-decoration: none !important;
+}
+
 /* 2セクション用　メディアクエリ -----------------------------------------------------*/
 
 /* 公式HP用設定 */
@@ -806,6 +965,49 @@ header {
     height: 100%; 
     width: 100%;
 }
+
+/*--------------------------------------------------------------------------*/
+/* 外部リンクセクション全体の調整 */
+.external-links {
+    /* 上のセクション（NEWS & SCHEDULE）との距離をしっかり確保 */
+    margin-top: 100px; 
+    
+    /* 下のフッターとの間隔も調整 */
+    margin-bottom: 80px; 
+    
+    padding: 0 20px;
+}
+
+/* 見出しのスタイル微調整（もしすでに定義があれば上書きしてください） */
+.external-links .section-title {
+    margin-bottom: 50px; /* 見出しと下のカードグリッドの間にも余白を作る */
+    text-align: center;
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+}
+
+/* カードを包むグリッドの調整（中央に寄せる） */
+.dual-card-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* カード同士の隙間 */
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* レスポンシブ対応（画面が狭いときは縦並びに） */
+@media (max-width: 768px) {
+    .external-links {
+        margin-top: 60px;
+    }
+    .dual-card-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+}
+
+/*--------------------------------------------------------------------------*/
 
 /* サイズパターンの追加と微調整 */
 .item-lg-v {
@@ -1343,12 +1545,19 @@ main {
 }
 
 /* 左側から右に向かってうっすら黒い影を敷く（オプション） */
+/* ヒーローテキストの可読性を上げるためのホワイトグラデーション */
 .hero::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 50%);
-    z-index: 5;
+    /* 左から右へ、白（不透明度40%）から透明へ流れるグラデーション */
+    background: linear-gradient(to right, 
+        rgba(255, 255, 255, 0.6) 0%, 
+        rgba(255, 255, 255, 0.2) 30%, 
+        rgba(255, 255, 255, 0) 60%
+    );
+    z-index: 5; /* スライダー(z-index:-1)より上で、コンテンツ(z-index:10)より下 */
+    pointer-events: none; /* 下にあるスライダーの操作を邪魔しない */
 }
 
 /* 2. Message Blocks */
@@ -1762,6 +1971,7 @@ body.parents-page::before {
 }
 
 /* 初期状態の制御：英語は隠し、日本語は出す */
+
 .lang-en {
     display: none; 
 }
@@ -1940,6 +2150,7 @@ body.parents-page::before {
     display: inline-block;
     max-width: 700px;
     line-height: 1.8;
+    color:#0056b3;
 }
 
 /* セクションごとの間隔を拡大 */
@@ -2467,3 +2678,108 @@ body.parents-page::before {
 .day-name:first-child { color: #ff4d4d; } /* 日曜日 */
 .day-name:last-child { color: #00bfff; }  /* 土曜日 */
 /*--------------------------- calendar section ----------------------------*/
+
+/*---------------------------- team summary --------------*/
+/* 1. 見出しセクションの強化 */
+.team-summary-section .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+/* 見出しの下にアクセントラインを入れる */
+.team-summary-section .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: #ff4b4b; /* 赤のアクセント */
+    border-radius: 2px;
+}
+
+/* 2. カード自体の引き締め */
+.summary-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 50px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f0f0f0;
+    /* 左側に太めのアクセントラインを入れると一気に締まります */
+    border-left: 8px solid #008cc3; 
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* 3. ラベルとコンテンツのメリハリ */
+.summary-label {
+    font-size: 0.9rem;
+    font-weight: 800; /* より太く */
+    color: #008cc3;   /* アクセントカラーに変更 */
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+}
+
+.summary-content {
+    font-size: 1.2rem;
+    color: #1a1a1a;   /* より濃い黒に */
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+/* チーム名のフォントサイズをさらに強調 */
+.summary-item:first-child .summary-content {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+/* 4. メッセージエリアの装飾 */
+.message-text {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 3px solid #ddd;
+    margin-top: 10px;
+    font-style: italic;
+    color: #555;
+}
+
+/* 各項目のセパレーター設定 */
+.summary-item {
+    padding-top: 20px;     /* 上の余白 */
+    padding-bottom: 20px;  /* 下の余白 */
+    border-bottom: 1px dashed #e0e0e0; /* 薄いグレーの点線でモダンに */
+    transition: background-color 0.3s; /* ホバー時の動き（オプション） */
+}
+
+/* 最後の項目の下線は不要なので消す */
+.summary-grid .summary-item:last-child {
+    border-bottom: none;
+}
+
+/* ホバーした時にうっすら背景色を変えると、さらに「最新」っぽくなります */
+.summary-item:hover {
+    background-color: #fafafa;
+}
+
+/* ラベルの微調整（下線とのバランス） */
+.summary-label {
+    margin-bottom: 12px;
+}
+
+/* メッセージエリア（最後の項目）の枠を調整 */
+.message-text {
+    margin-top: 15px;
+    background: #fdfdfd;
+    border: 1px solid #f0f0f0; /* 囲み枠を薄く入れる */
+    border-left: 4px solid #008cc3; /* ここにもアクセント */
+}
+/*---------------------------- team summary --------------*/
+
