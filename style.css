@@ -1703,8 +1703,30 @@ main {
 
 /* 6. Responsive Styles */
 @media (max-width: 768px) {
+    /* --- 今回追加するヒーロー要素 --- */
+    .hero-content .catch-copy { 
+        font-size: 1.8rem !important; 
+        margin-top: 10px;
+    }
+    .hero-content .club-tag { 
+        font-size: 1.2rem !important; 
+    }
+    .hero-content .city-name { 
+        font-size: 0.8rem !important; 
+        letter-spacing: 0.2em;
+    }
+    .hero-content .main-logo-img { 
+        max-width: 120px; 
+    }
+
+    /* --- 既存のコード --- */
     .hero-content .main-title { font-size: 2rem; }
-    .message-block { flex-direction: column; gap: 30px; text-align: center; margin-bottom: 80px; }
+    .message-block { 
+        flex-direction: column; 
+        gap: 30px; 
+        text-align: center; 
+        margin-bottom: 80px; 
+    }
     .message-block.inverse { flex-direction: column; }
     .message-block .icon-wrap { flex: 0 0 120px; height: 120px; }
     .message-block .icon-wrap i { font-size: 3rem; }
