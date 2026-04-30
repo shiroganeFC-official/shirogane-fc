@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>全日付予定一覧</title>
+    <style>
+        body { font-family: sans-serif; }
+        #event-list { max-width: 800px; margin: 20px auto; }
+        .header { text-align: center; margin-bottom: 20px; font-size: 1.5em; font-weight: bold; }
+        .nav-btn { cursor: pointer; padding: 5px 15px; border: 1px solid #ccc; background: #fff; }
+        .day-row { border-bottom: 1px solid #eee; padding: 12px 0; display: flex; align-items: flex-start; cursor: pointer; }
+        .day-row:hover { background-color: #f9f9f9; }
+        .date-col { width: 140px; font-weight: bold; flex-shrink: 0; }
+        /* 日付リンクのスタイル */
+        .date-col a { color: #000; text-decoration: none; display: block; }
+        .date-col a:hover { color: #007bff; text-decoration: underline; }
+        .event-col { color: #555; display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
+        .event-item { display: flex; gap: 15px; align-items: baseline; }
+        .time-info { color: #007bff; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="nav-btn" onclick="changeMonth(-1)">＜</button>
+        <span id="current-month"></span>
+        <button class="nav-btn" onclick="changeMonth(1)">＞</button>
+    </div>
+    <div id="event-list"></div>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="index.html">カレンダーに戻る</a>
+    </div>
+
+    <script>
+        const GSS_URL = 'https://script.google.com/macros/s/AKfycbwTNgQ4Axd7QzTxj5zMTM9zYFlpsGiuTz1AxDjfFOu76O2M1OtDUTAH6-pY7duotm7Eow/exec';
+        
+        let allEvents = [];
+        let currentYear = 2026;
+        let currentMonth = 4;
+
+        const extractTime = (val) => {
+            if (!val) return "";
+            const s = val.toString();
+            const match = s.match(/\d{1,2}:\d{2}/);
+            return match ? match[0] : "";
+        };
+
+        const getDayOfWeek = (year, month, day) => {
+            const date = new Date(year, month - 1, day);
+            const days = ['日', '月', '火', '水', '木', '金', '土'];
+            return days[date.getDay()];
+        };
+
+        function loadEventsAndRender() {
+            fetch(GSS_URL)
+                .then(res => res.json())
+                .then(data => {
+                    allEvents = data;
+                    renderList();
+                });
+        }
+
+function renderList() {
+            const listDiv = document.getElementById('event-list');
+            listDiv.innerHTML = '';
+            document.getElementById('current-month').innerText = `${currentYear}年${currentMonth}月`;
+            
+            const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
+
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dateStr = `${currentYear}-${String(currentMonth).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                const dayEvents = allEvents.filter(e => e.start === dateStr);
+                const dayOfWeek = getDayOfWeek(currentYear, currentMonth, i);
+                
+                const row = document.createElement('div');
+                row.className = 'day-row';
+                
+                // --- 修正箇所：日付部分のリンク生成を条件分岐 ---
+                const hasEvent = dayEvents.length > 0;
+                const dateDisplay = `${i}日 (${dayOfWeek})`;
+                const dateCol = hasEvent 
+                    ? `<div class="date-col"><a href="attendance.html?date=${dateStr}">${dateDisplay}</a></div>`
+                    : `<div class="date-col">${dateDisplay}</div>`; // リンクなし
+
+                if (hasEvent) {
+                    const eventDetails = dayEvents.map(e => {
+                        const p = e.extendedProps || {};
+                        const start = extractTime(p.startTime);
+                        const end = extractTime(p.endTime);
+                        const timeInfo = (start && end) ? `${start}-${end}` : '';
+                        const locationInfo = p.location ? `(${p.location})` : '';
+                        
+                        return `
+                            <div class="event-item">
+                                <strong>${e.title}:</strong> 
+                                <span>${p.eventName || ''}</span>
+                                <span class="time-info">${timeInfo}</span>
+                                <span>${locationInfo}</span>
+                            </div>
+                        `;
+                    }).join('');
+                    
+                    row.innerHTML = `${dateCol}<div class="event-col">${eventDetails}</div>`;
+                    
+                    row.onclick = (e) => {
+                        if (e.target.tagName === 'A') return;
+                        
+                        let message = `【${i}日 (${dayOfWeek}) の予定】\n\n`;
+                        dayEvents.forEach((ev, index) => {
+                            const p = ev.extendedProps || {};
+                            message += `●予定${index + 1}: ${ev.title}\n 時間: ${extractTime(p.startTime)}-${extractTime(p.endTime)}\n 詳細: ${p.eventName || '---'}\n 場所: ${p.location || '---'}\n 備考: ${p.remarks || '---'}\n\n`;
+                        });
+                        alert(message);
+                    };
+                } else {
+                    row.innerHTML = `${dateCol}<div class="event-col">-</div>`;
+                }
+                listDiv.appendChild(row);
+            }
+        }
+        function changeMonth(delta) {
+            currentMonth += delta;
+            if (currentMonth > 12) { currentMonth = 1; currentYear++; }
+            if (currentMonth < 1) { currentMonth = 12; currentYear--; }
+            renderList();
+        }
+
+        loadEventsAndRender();
+    </script>
+</body>
+</html>

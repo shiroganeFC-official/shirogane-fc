@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>オープンキャンパス予定表</title>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+    <style>
+        #calendar { max-width: 900px; margin: 40px auto; font-family: sans-serif; }
+        .fc-daygrid-day-frame { border: 1px solid #ddd; min-height: 100px; }
+        .fc-col-header-cell { background-color: #f8f9fa; padding: 10px; }
+        
+    </style>
+</head>
+<body>
+    <div id='calendar'></div>
+    <div style="text-align: center;">
+        <a href="list.html" style="padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">全日付リストを表示する</a>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          locale: 'ja',
+          events: 'https://script.google.com/macros/s/AKfycbwTNgQ4Axd7QzTxj5zMTM9zYFlpsGiuTz1AxDjfFOu76O2M1OtDUTAH6-pY7duotm7Eow/exec',
+          eventClick: function(info) {
+            var props = info.event.extendedProps;
+            alert(`【内容】: ${info.event.title}\n【詳細】: ${props.eventName || '---'}\n【場所】: ${props.location || '---'}\n【備考】: ${props.remarks || '---'}`);
+          }
+        });
+        calendar.render();
+      });
+    </script>
+</body>
+</html>

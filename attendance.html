@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>出欠確認</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background-color: #000; color: #fff; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        th, td { border: 1px solid #444; padding: 8px; text-align: center; }
+        th { background-color: #222; }
+        #modal { display:none; position:fixed; top:20%; left:30%; width:40%; background:#222; padding:20px; border:1px solid #555; z-index:100; color: #fff; }
+    </style>
+</head>
+<body>
+    <h2 id="target-date">読み込み中...</h2>
+    <a href="list.html" style="color:yellow;">カレンダーに戻る</a>
+
+    <h3>役員</h3>
+    <table id="guardian-list"><thead><tr><th>名前</th><th>設定</th><th>出欠</th><th>車出し</th><th>備考</th><th>更新日時</th></tr></thead><tbody></tbody></table>
+    <h3>監督・コーチ</h3>
+    <table id="coach-list"><thead><tr><th>名前</th><th>設定</th><th>出欠</th><th>車出し</th><th>備考</th><th>更新日時</th></tr></thead><tbody></tbody></table>
+    <h3>選手</h3>
+    <table id="player-list"><thead><tr><th>名前</th><th>設定</th><th>出欠</th><th>車出し</th><th>備考</th><th>更新日時</th></tr></thead><tbody></tbody></table>
+
+<div id="modal" style="display:none; position:fixed; top:20%; left:30%; width:40%; background:#222; padding:20px; border:1px solid #555; z-index:100; color: #fff;">
+    <h3 id="modal-name">氏名</h3>
+    <select id="input-status"><option value="出席">出席</option><option value="欠席">欠席</option></select>
+    <label><input type="checkbox" id="input-car"> 車出し可</label>
+    <input type="text" id="input-remarks" placeholder="備考">
+    
+    <div style="margin-top: 15px;">
+        <button onclick="saveData()">登録</button>
+    </div>
+</div>
+
+<script>
+    const GSS_URL = 'https://script.google.com/macros/s/AKfycbwTNgQ4Axd7QzTxj5zMTM9zYFlpsGiuTz1AxDjfFOu76O2M1OtDUTAH6-pY7duotm7Eow/exec';
+    let currentTargetName = "";
+    const params = new URLSearchParams(window.location.search);
+    const dateStr = params.get('date');
+
+    window.onload = () => {
+        document.getElementById('target-date').innerText = dateStr ? `${dateStr} の出欠確認` : "日付を選択してください";
+        
+        fetch(GSS_URL + "?action=getMembers")
+            .then(res => res.json())
+            .then(members => {
+                renderTables(members);
+                return fetch(GSS_URL + "?action=getLogs");
+            })
+            .then(res => res.json())
+            .then(logs => {
+                console.log("取得したログ:", logs);
+                fillLogs(logs, dateStr);
+            })
+            .catch(err => console.error("エラー発生:", err));
+    };
+
+    function renderTables(members) {
+        const containers = { 'guardian': '#guardian-list tbody', 'coach': '#coach-list tbody', 'player': '#player-list tbody' };
+        members.forEach(m => {
+            const tbody = document.querySelector(containers[m.status]);
+            if (tbody) {
+                tbody.insertAdjacentHTML('beforeend', `<tr><td>${m.name}</td><td><button onclick="openModal('${m.name}')">設定</button></td><td class="status">-</td><td class="car">-</td><td class="remarks">-</td><td class="timestamp">-</td></tr>`);
+            }
+        });
+    }
+
+function fillLogs(logs, targetDate) {
+        const rows = document.querySelectorAll('tr');
+        
+        logs.forEach(log => {
+            // ログの日付を文字列化（YYYY-MM-DD）
+            let logDateStr = "";
+            const d = new Date(log.date);
+            if (!isNaN(d.getTime())) {
+                logDateStr = d.getFullYear() + "-" + 
+                             String(d.getMonth() + 1).padStart(2, '0') + "-" + 
+                             String(d.getDate()).padStart(2, '0');
+            }
+
+            // URLから取った日付(targetDate)と比較
+            if (logDateStr === targetDate) {
+                rows.forEach(tr => {
+                    // 名前が一致する行を探す
+                    if (tr.cells[0] && tr.cells[0].innerText === log.name) {
+                        tr.querySelector('.status').innerText = log.status || "-";
+                        tr.querySelector('.car').innerText = log.car_support || "-";
+                        tr.querySelector('.remarks').innerText = log.remarks || "-";
+                        tr.querySelector('.timestamp').innerText = log.timestamp || "-";
+                    }
+                });
+            }
+        });
+    }
+
+    function openModal(name) {
+        currentTargetName = name;
+        document.getElementById('modal-name').innerText = name;
+        document.getElementById('modal').style.display = 'block';
+    }
+
+    function closeModal() { document.getElementById('modal').style.display = 'none'; }
+
+function saveData() {
+    const payload = {
+        date: dateStr,
+        name: currentTargetName,
+        status: document.getElementById('input-status').value,
+        car_support: document.getElementById('input-car').checked ? "可能" : "不可",
+        remarks: document.getElementById('input-remarks').value
+    };
+
+    // 'no-cors' モードで送信することで、レスポンスのチェックをバイパスします
+    fetch(GSS_URL, {
+        method: 'POST',
+        mode: 'no-cors', 
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    })
+    .then(() => {
+        // 送信が完了したら（成功したとみなして）メッセージを表示
+        alert("登録完了しました！");
+        closeModal();
+        location.reload();
+    })
+    .catch(err => {
+        // ここに来る場合はネットワーク自体が繋がっていない場合のみ
+        console.error("ネットワークエラー:", err);
+        alert("ネットワークエラーが発生しました。インターネット接続を確認してください。");
+    });
+}
+</script>
+</body>
+</html>
