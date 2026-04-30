@@ -3,12 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>オープンキャンパス予定表</title>
+    <script src="https://cdn.tailwindcss.com"></script>　
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
     <style>
+        body { font-family: 'Noto Sans JP', sans-serif; font-size: 16px; }
         #calendar { max-width: 900px; margin: 40px auto; font-family: sans-serif; }
         .fc-daygrid-day-frame { border: 1px solid #ddd; min-height: 100px; }
         .fc-col-header-cell { background-color: #f8f9fa; padding: 10px; }
         
+        #calendar { 
+
+              max-width: 900px; 
+              margin: 20px auto; 
+              font-family: sans-serif; 
+              background: white; /* 背景を白く */
+              padding: 20px;
+              border-radius: 10px;
+              box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* 影をつけて浮かす */
+      }     
+        /* スマホ向け：カレンダーのヘッダー調整 */
+        .fc .fc-toolbar-title { font-size: 1.25rem !important; font-weight: 700; }
+        .fc .fc-button-primary { padding: 0.5rem 0.75rem !important; }
+
+        /* カレンダー全体をレスポンシブに */
+        .fc {
+            /* スマホ時は小さく、PC時は大きくフォントを可変させる */
+            font-size: clamp(0.7rem, 2vw, 1rem) !important;
+        }
+        
+        /* 日付の数字をさらに小さく調整 */
+        .fc .fc-daygrid-day-number {
+            font-size: clamp(0.6rem, 2vw, 0.9rem) !important;
+            padding: 2px 4px !important;
+        }
+
+
+
+        /* モーダル表示時のボディスクロール抑制 */
+        .modal-open { overflow: hidden; }
     </style>
 </head>
 <body>
@@ -17,20 +50,68 @@
         <a href="list.html" style="padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">全日付リストを表示する</a>
     </div>
 
+<div id="event-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-2xl p-8 max-w-sm w-full shadow-2xl transform transition-all scale-100 opacity-100">
+        <h3 id="modal-title" class="text-2xl font-extrabold text-gray-900 mb-5 tracking-tight"></h3>
+        <div id="modal-body" class="space-y-4 text-gray-700 whitespace-pre-line leading-relaxed"></div>
+        <button onclick="closeModal()" class="mt-8 w-full bg-gray-900 hover:bg-black text-white py-3 rounded-lg font-bold tracking-wide transition duration-150">閉じる</button>
+    </div>
+</div>
+
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridMonth',
           locale: 'ja',
+          height: 'auto',
           events: 'https://script.google.com/macros/s/AKfycbwTNgQ4Axd7QzTxj5zMTM9zYFlpsGiuTz1AxDjfFOu76O2M1OtDUTAH6-pY7duotm7Eow/exec',
-          eventClick: function(info) {
-            var props = info.event.extendedProps;
-            alert(`【内容】: ${info.event.title}\n【詳細】: ${props.eventName || '---'}\n【場所】: ${props.location || '---'}\n【備考】: ${props.remarks || '---'}`);
-          }
+eventClick: function(info) {
+    var props = info.event.extendedProps;
+    
+    // 時間表示の整形関数（HH:mmにする）
+    var formatTime = function(timeStr) {
+        if (!timeStr) return '--:--';
+        if (timeStr.includes('T')) {
+            var dateObj = new Date(timeStr);
+            return dateObj.getHours().toString().padStart(2, '0') + ':' + dateObj.getMinutes().toString().padStart(2, '0');
+        }
+        return timeStr; // すでにHH:mmならそのまま
+    };
+
+    var startTimeFormatted = formatTime(props.startTime);
+    var endTimeFormatted = formatTime(props.endTime);
+
+    // クール＆ビューティーな表示テンプレート
+// 余白を詰めたテンプレート
+var contentHtml = `
+        <div class="mb-4">
+            <span class="inline-block bg-blue-600 text-white text-base px-6 py-2 rounded-full font-black tracking-wider shadow-md">
+                ${props.type || '---'}
+            </span>
+        </div>
+        <div class="space-y-4">
+            <div><span class="text-xs font-bold text-gray-400 block uppercase tracking-wider">対象</span><span class="text-xl font-extrabold text-gray-950">${info.event.title || '---'}</span></div>
+            <div><span class="text-xs font-bold text-gray-400 block uppercase tracking-wider">内容</span><span class="text-lg font-bold text-gray-800">${props.eventName || '---'}</span></div>
+            <div><span class="text-xs font-bold text-gray-400 block uppercase">時間</span><span class="text-lg font-bold text-gray-800">${startTimeFormatted} 〜 ${endTimeFormatted}</span></div>
+            <div><span class="text-xs font-bold text-gray-400 block uppercase">場所</span><span class="text-lg font-bold text-gray-800">${props.location || '---'}</span></div>
+            <div><span class="text-xs font-bold text-gray-400 block uppercase">備考</span><span class="text-base text-gray-700">${props.remarks || '---'}</span></div>
+        </div>
+    `;
+    
+    // モーダルにセットして表示
+    document.getElementById('modal-title').innerText = info.event.startStr;
+    document.getElementById('modal-body').innerHTML = contentHtml; // HTMLとしてセット
+    document.getElementById('event-modal').classList.remove('hidden');
+}
         });
         calendar.render();
       });
+
+function closeModal() {
+    // 逆に「hidden」クラスを付与して隠します
+    document.getElementById('event-modal').classList.add('hidden');
+}
     </script>
 </body>
 </html>
