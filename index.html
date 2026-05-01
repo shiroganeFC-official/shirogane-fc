@@ -54,7 +54,7 @@
             <li><a href="index.html" class="active">HOME</a></li>
             <li><a href="team_summary.html">ABOUT US</a></li>
             <li><a href="#">TEAMS</a></li>
-            <li><a href="https://momonga-net.com/football/ScheduleSearch.do">SCHEDULE</a></li>
+            <li><a href="javascript:void(0);" onclick="checkScheduleAccess()">SCHEDULE</a></li>
         </ul>
 
         <div class="header-logo">
@@ -66,7 +66,7 @@
             <li class="mobile-only"><a href="index.html" class="active">HOME</a></li>
             <li class="mobile-only"><a href="team_summary.html">ABOUT US</a></li>
             <li class="mobile-only"><a href="#">TEAMS</a></li>
-            <li class="mobile-only"><a href="https://momonga-net.com/football/ScheduleSearch.do">SCHEDULE</a></li>
+            <li class="mobile-only"><a href="javascript:void(0);" onclick="checkScheduleAccess()">SCHEDULE</a></li>
             
             <li><a href="#">COACHES</a></li>
             <li><a href="#">GALLERY</a></li>
@@ -396,7 +396,20 @@
             <span class="modal-close">&times;</span>
             <img class="modal-content" id="modalImg">
         </div>
+    <script>
+    function checkScheduleAccess() {
+        const password = prompt("パスワードを入力してください：");
+        const correctPassword = "設定したいパスワード"; // ここにパスワードを記述
 
+        if (password === correctPassword) {
+            // パスワードが一致した場合のみ移動
+            window.location.href = "list.html";
+        } else if (password !== null) {
+            // 間違っていて、かつキャンセルボタンが押されていない場合
+            alert("パスワードが正しくありません。");
+        }
+    }
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
