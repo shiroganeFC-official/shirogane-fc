@@ -9,25 +9,16 @@
     <style>
         body { font-family: 'Noto Sans JP', sans-serif; background-color: #f9fafb; margin: 0; padding: 10px; overflow-x: hidden; }
         
-        .fixed-header {
-            position: sticky; top: 0; background-color: #f9fafb; z-index: 30; padding-bottom: 10px;
-        }
-
+        .fixed-header { position: sticky; top: 0; background-color: #f9fafb; z-index: 30; padding-bottom: 10px; }
         .header-top { max-width: 1000px; margin: 10px auto 10px; display: flex; justify-content: space-between; align-items: center; }
-        .back-btn { font-size: 0.85rem; color: #2563eb; font-weight: 700; text-decoration: none; border: 1px solid #2563eb; padding: 5px 12px; border-radius: 20px; transition: all 0.2s; }
+        .back-btn { font-size: 0.8rem; color: #2563eb; font-weight: 700; text-decoration: none; border: 1px solid #2563eb; padding: 4px 10px; border-radius: 20px; transition: all 0.2s; }
         .back-btn:hover { background: #2563eb; color: white; }
 
-        /* 年月ナビゲーションのスタイル調整 */
-        .schedule-nav { max-width: 1000px; margin: 0 auto; display: flex; justify-content: center; align-items: center; gap: 12px; }
-        .nav-btn { background: #fff; border: 1px solid #e5e7eb; padding: 5px 12px; border-radius: 8px; font-weight: 900; color: #2563eb; transition: all 0.2s; }
+        .schedule-nav { max-width: 1000px; margin: 0 auto; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .nav-btn { background: #fff; border: 1px solid #e5e7eb; padding: 4px 10px; border-radius: 8px; font-weight: 900; color: #2563eb; transition: all 0.2s; }
         .nav-btn:hover { background: #2563eb; color: white; }
         
-        /* プルダウンのAwesomeスタイル */
-        .select-date {
-            font-size: 1.2rem; font-weight: 900; color: #111827; background: transparent;
-            border: none; cursor: pointer; outline: none; padding: 2px 4px; border-radius: 6px;
-            transition: background 0.2s;
-        }
+        .select-date { font-size: clamp(1rem, 4vw, 1.3rem); font-weight: 900; color: #111827; background: transparent; border: none; outline: none; cursor: pointer; border-radius: 6px; }
         .select-date:hover { background: #e5e7eb; }
 
         .table-container { max-width: 1000px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
@@ -36,8 +27,8 @@
         th { 
             position: sticky; top: 105px; 
             background-color: #111827 !important; 
-            padding: 12px 8px; 
-            font-size: 0.95rem; 
+            padding: 12px 4px; 
+            font-size: clamp(0.65rem, 2.5vw, 0.95rem); 
             color: #ffffff !important; 
             font-weight: 900 !important;
             border-bottom: 2px solid #000; 
@@ -45,13 +36,17 @@
             opacity: 1 !important;
         }
 
-        td { padding: 14px 6px; border-bottom: 1px solid #f3f4f6; vertical-align: top; font-size: 0.9rem; text-align: left; }
+        td { padding: 10px 4px; border-bottom: 1px solid #f3f4f6; vertical-align: top; font-size: clamp(0.7rem, 2.5vw, 0.95rem); line-height: 1.3; text-align: left; }
 
-        .col-date   { width: 14%; text-align: right; padding-right: 15px; font-weight: 900; }
-        .col-type   { width: 10%; }
+        /* 複数予定の区切り点線スタイル */
+        .event-item { padding: 4px 0; }
+        .event-item + .event-item { border-top: 1px dashed #e5e7eb; margin-top: 4px; padding-top: 8px; }
+
+        .col-date   { width: 14%; text-align: right; padding-right: 8px; font-weight: 900; }
+        .col-type   { width: 10%; text-align: center; }
         .col-time   { width: 18%; font-weight: 700; }
         .col-target { width: 20%; font-weight: 800; color: #111827; }
-        .col-name   { width: 23%; color: #374151; font-weight: 500; } 
+        .col-name   { width: 24%; color: #374151; font-weight: 500; } 
         .col-loc    { width: 15%; color: #6b7280; } 
 
         .date-link { color: #2563eb; text-decoration: underline; font-weight: 900; }
@@ -60,12 +55,17 @@
         .row-sun td { background-color: #fff1f2 !important; color: #ef4444; }
         .row-sat td { background-color: #eff6ff !important; color: #3b82f6; }
         
-        .type-tag { display: inline-block; background: #e0e7ff; color: #4338ca; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; }
-        .has-event { cursor: pointer; }
-        .has-event:hover { background: #f8fafc; }
-        .empty-text { color: #d1d5db; font-style: italic; }
+        .type-tag { display: inline-block; background: #e0e7ff; color: #4338ca; padding: 1px 4px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; line-height: 1.2; }
+        @media (max-width: 767px) {
+            .type-text { display: none; }
+            .type-icon { display: inline-block; font-size: 1.1rem; }
+            .type-tag { background: transparent; padding: 0; }
+        }
+        @media (min-width: 768px) { .type-icon { display: none; } }
 
-        /* モーダル */
+        .has-event { cursor: pointer; }
+        .empty-text { color: #d1d5db; font-size: 0.75rem; text-align: center; padding: 20px 0; }
+
         #event-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 9999; display: flex; align-items: center; justify-content: center; visibility: hidden; opacity: 0; transition: opacity 0.3s, visibility 0.3s; }
         #event-modal.show { visibility: visible; opacity: 1; }
         .modal-content { background: white; width: 95%; max-width: 440px; padding: 24px 20px; border-radius: 28px; transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); max-height: 90vh; overflow-y: auto; }
@@ -73,8 +73,8 @@
         .event-card + .event-card { margin-top: 30px; padding-top: 30px; border-top: 2px dashed #e5e7eb; }
         .info-group { margin-bottom: 15px; }
         .info-label { display: block; font-size: 13px; font-weight: 800; color: #6b7280; margin-bottom: 3px; }
-        .info-value { display: block; font-size: 1.2rem; font-weight: 700; color: #1f2937; line-height: 1.4; }
-        .highlight-value { border-left: 5px solid #2563eb; padding-left: 12px; font-size: 1.4rem; }
+        .info-value { display: block; font-size: 1.1rem; font-weight: 700; color: #1f2937; line-height: 1.4; }
+        .highlight-value { border-left: 5px solid #2563eb; padding-left: 12px; font-size: 1.2rem; }
         .close-btn { margin-top: 20px; width: 100%; background: #111827; color: white; padding: 16px; border-radius: 18px; font-weight: 700; font-size: 1.1rem; }
     </style>
 </head>
@@ -89,9 +89,9 @@
             <button class="nav-btn" onclick="changeMonth(-1)">＜</button>
             <div class="flex items-center">
                 <select id="select-year" class="select-date" onchange="jumpToDate()"></select>
-                <span class="text-xl font-black mr-2">年</span>
+                <span class="font-black mr-1 ml-1">年</span>
                 <select id="select-month" class="select-date" onchange="jumpToDate()"></select>
-                <span class="text-xl font-black">月</span>
+                <span class="font-black ml-1">月</span>
             </div>
             <button class="nav-btn" onclick="changeMonth(1)">＞</button>
         </div>
@@ -123,22 +123,23 @@
 
     <script>
         const url = 'https://script.google.com/macros/s/AKfycbwTNgQ4Axd7QzTxj5zMTM9zYFlpsGiuTz1AxDjfFOu76O2M1OtDUTAH6-pY7duotm7Eow/exec';
-        let currentViewDate = new Date(); // 今日を基準に初期化
+        let currentViewDate = new Date(); 
         let allEvents = [];
 
-        // プルダウンの生成
+        const typeIconMap = {
+            '通常練習': '🏃', '体育館練習': '🏠', '公園練習': '🌳', 
+            '練習試合': '⚽', '大会': '🏆', '学校イベント': '🏫', '休み': '☕'
+        };
+
         function initSelects() {
             const yearSelect = document.getElementById('select-year');
             const monthSelect = document.getElementById('select-month');
             const currentYear = new Date().getFullYear();
-
-            // 年：前後2年分程度
             for (let i = currentYear - 1; i <= currentYear + 2; i++) {
                 const opt = document.createElement('option');
                 opt.value = i; opt.innerText = i;
                 yearSelect.appendChild(opt);
             }
-            // 月：1-12月
             for (let i = 1; i <= 12; i++) {
                 const opt = document.createElement('option');
                 opt.value = i - 1; opt.innerText = i;
@@ -162,7 +163,6 @@
             const lastDay = new Date(year, month + 1, 0).getDate();
             const days = ['日','月','火','水','木','金','土'];
             
-            // プルダウンの値を現在の表示月に合わせる
             document.getElementById('select-year').value = year;
             document.getElementById('select-month').value = month;
 
@@ -174,6 +174,8 @@
                 const d = new Date(t);
                 return isNaN(d.getTime()) ? (t === '00:00' || t === '--:--' ? '' : t) : d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');
             };
+
+            const genCol = (arr) => arr.map(c => `<div class="event-item">${c}</div>`).join('');
 
             for (let day = 1; day <= lastDay; day++) {
                 const dateObj = new Date(year, month, day);
@@ -187,42 +189,41 @@
 
                 if (dayEvents.length > 0) {
                     tr.classList.add('has-event');
-                    const attendanceUrl = `attendance.html?date=${dateStr}`;
+                    const attUrl = `attendance.html?date=${dateStr}`;
                     tr.onclick = (e) => { if (!e.target.classList.contains('date-link')) openModal(dayEvents); };
 
                     tr.innerHTML = `
-                        <td class="col-date"><a href="${attendanceUrl}" class="date-link">${day}(${dayW})</a></td>
-                        <td class="col-type">${dayEvents.map(e => e.extendedProps.type ? `<span class="type-tag">${e.extendedProps.type}</span>` : '').join('<br>')}</td>
-                        <td class="col-time">${dayEvents.map(e => {
+                        <td class="col-date"><a href="${attUrl}" class="date-link">${day}(${dayW})</a></td>
+                        <td class="col-type">${genCol(dayEvents.map(e => {
+                            const type = e.extendedProps.type || '予定';
+                            const icon = typeIconMap[type] || '🗓️';
+                            return `<span class="type-tag"><span class="type-icon">${icon}</span><span class="type-text">${type}</span></span>`;
+                        }))}</td>
+                        <td class="col-time">${genCol(dayEvents.map(e => {
                             const start = fmt(e.extendedProps.startTime);
                             const end = fmt(e.extendedProps.endTime);
-                            return start || end ? `<span class="text-blue-600">${start} 〜 ${end}</span>` : '';
-                        }).join('<br>')}</td>
-                        <td class="col-target">${dayEvents.map(e => e.title || '').join('<br>')}</td>
-                        <td class="col-name">${dayEvents.map(e => e.extendedProps.eventName || '').join('<br>')}</td>
-                        <td class="col-loc">${dayEvents.map(e => (e.extendedProps.location === '---' ? '' : e.extendedProps.location) || '').join('<br>')}</td>
+                            return start || end ? `<span class="text-blue-600">${start} 〜 ${end}</span>` : '<span class="invisible">-</span>';
+                        }))}</td>
+                        <td class="col-target">${genCol(dayEvents.map(e => e.title || ''))}</td>
+                        <td class="col-name">${genCol(dayEvents.map(e => e.extendedProps.eventName || ''))}</td>
+                        <td class="col-loc">${genCol(dayEvents.map(e => {
+                            const loc = e.extendedProps.location;
+                            return (loc === '---' || !loc) ? '<span class="invisible">-</span>' : loc;
+                        }))}</td>
                     `;
                 } else {
                     tr.innerHTML = `
                         <td class="col-date"><span class="date-text">${day}(${dayW})</span></td>
-                        <td colspan="5" class="empty-text text-center text-gray-300">---</td>
+                        <td colspan="5" class="empty-text">---</td>
                     `;
                 }
                 tableBody.appendChild(tr);
             }
         }
 
-        function changeMonth(diff) {
-            currentViewDate.setMonth(currentViewDate.getMonth() + diff);
-            renderTable();
-        }
-
-        function jumpToDate() {
-            const y = document.getElementById('select-year').value;
-            const m = document.getElementById('select-month').value;
-            currentViewDate = new Date(y, m, 1);
-            renderTable();
-        }
+        function changeMonth(diff) { currentViewDate.setMonth(currentViewDate.getMonth() + diff); renderTable(); }
+        function jumpToDate() { currentViewDate = new Date(document.getElementById('select-year').value, document.getElementById('select-month').value, 1); renderTable(); }
+        function closeModal() { document.getElementById('event-modal').classList.remove('show'); }
 
         function openModal(dayEvents) {
             const container = document.getElementById('modal-events-container');
@@ -233,7 +234,6 @@
                 return isNaN(d.getTime()) ? t : d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');
             };
             document.getElementById('modal-date-display').innerText = dayEvents[0].start.split('T')[0];
-            
             dayEvents.forEach(event => {
                 const p = event.extendedProps;
                 const start = fmt(p.startTime);
@@ -242,13 +242,16 @@
                 const card = document.createElement('div');
                 card.className = 'event-card';
                 card.innerHTML = `
-                    ${p.type ? `<div class="info-group"><span class="info-label">種別</span><div class="mt-1"><span class="type-tag">${p.type}</span></div></div>` : ''}
+                    <div class="info-group"><span class="info-label">種別</span><div class="mt-1"><span class="type-tag">${p.type || '予定'}</span></div></div>
                     ${start || end ? `<div class="info-group"><span class="info-label">時間</span><span class="info-value text-blue-600">${start} 〜 ${end}</span></div>` : ''}
                     <div class="info-group">
                         <span class="info-label">対象</span>
                         <span class="info-value highlight-value">${event.title || '---'}</span>
                     </div>
-                    ${p.eventName ? `<div class="info-group"><span class="info-label">内容（イベント名）</span><span class="info-value">${p.eventName}</span></div>` : ''}
+                    <div class="info-group">
+                        <span class="info-label">内容（イベント名）</span>
+                        <span class="info-value">${p.eventName || '---'}</span>
+                    </div>
                     ${loc ? `<div class="info-group"><span class="info-label">場所</span><span class="info-value">${loc}</span></div>` : ''}
                     ${p.remarks && p.remarks !== '---' ? `<div class="info-group"><span class="info-label">備考</span><span class="info-value font-normal text-gray-500 text-sm">${p.remarks}</span></div>` : ''}
                 `;
@@ -256,8 +259,6 @@
             });
             document.getElementById('event-modal').classList.add('show');
         }
-
-        function closeModal() { document.getElementById('event-modal').classList.remove('show'); }
 
         initSelects();
         fetchAndRender();
