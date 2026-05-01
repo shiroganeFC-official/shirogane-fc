@@ -2,129 +2,265 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>全日付予定一覧</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>予定一覧 | オープンキャンパス</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: sans-serif; }
-        #event-list { max-width: 800px; margin: 20px auto; }
-        .header { text-align: center; margin-bottom: 20px; font-size: 1.5em; font-weight: bold; }
-        .nav-btn { cursor: pointer; padding: 5px 15px; border: 1px solid #ccc; background: #fff; }
-        .day-row { border-bottom: 1px solid #eee; padding: 12px 0; display: flex; align-items: flex-start; cursor: pointer; }
-        .day-row:hover { background-color: #f9f9f9; }
-        .date-col { width: 140px; font-weight: bold; flex-shrink: 0; }
-        /* 日付リンクのスタイル */
-        .date-col a { color: #000; text-decoration: none; display: block; }
-        .date-col a:hover { color: #007bff; text-decoration: underline; }
-        .event-col { color: #555; display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
-        .event-item { display: flex; gap: 15px; align-items: baseline; }
-        .time-info { color: #007bff; font-weight: bold; }
+        body { font-family: 'Noto Sans JP', sans-serif; background-color: #f9fafb; margin: 0; padding: 10px; overflow-x: hidden; }
+        
+        .fixed-header {
+            position: sticky; top: 0; background-color: #f9fafb; z-index: 30; padding-bottom: 10px;
+        }
+
+        .header-top { max-width: 1000px; margin: 10px auto 10px; display: flex; justify-content: space-between; align-items: center; }
+        .back-btn { font-size: 0.85rem; color: #2563eb; font-weight: 700; text-decoration: none; border: 1px solid #2563eb; padding: 5px 12px; border-radius: 20px; transition: all 0.2s; }
+        .back-btn:hover { background: #2563eb; color: white; }
+
+        /* 年月ナビゲーションのスタイル調整 */
+        .schedule-nav { max-width: 1000px; margin: 0 auto; display: flex; justify-content: center; align-items: center; gap: 12px; }
+        .nav-btn { background: #fff; border: 1px solid #e5e7eb; padding: 5px 12px; border-radius: 8px; font-weight: 900; color: #2563eb; transition: all 0.2s; }
+        .nav-btn:hover { background: #2563eb; color: white; }
+        
+        /* プルダウンのAwesomeスタイル */
+        .select-date {
+            font-size: 1.2rem; font-weight: 900; color: #111827; background: transparent;
+            border: none; cursor: pointer; outline: none; padding: 2px 4px; border-radius: 6px;
+            transition: background 0.2s;
+        }
+        .select-date:hover { background: #e5e7eb; }
+
+        .table-container { max-width: 1000px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        table { width: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; } 
+        
+        th { 
+            position: sticky; top: 105px; 
+            background-color: #111827 !important; 
+            padding: 12px 8px; 
+            font-size: 0.95rem; 
+            color: #ffffff !important; 
+            font-weight: 900 !important;
+            border-bottom: 2px solid #000; 
+            text-align: left; z-index: 15;
+            opacity: 1 !important;
+        }
+
+        td { padding: 14px 6px; border-bottom: 1px solid #f3f4f6; vertical-align: top; font-size: 0.9rem; text-align: left; }
+
+        .col-date   { width: 14%; text-align: right; padding-right: 15px; font-weight: 900; }
+        .col-type   { width: 10%; }
+        .col-time   { width: 18%; font-weight: 700; }
+        .col-target { width: 20%; font-weight: 800; color: #111827; }
+        .col-name   { width: 23%; color: #374151; font-weight: 500; } 
+        .col-loc    { width: 15%; color: #6b7280; } 
+
+        .date-link { color: #2563eb; text-decoration: underline; font-weight: 900; }
+        .date-text { font-weight: 900; color: #111827; }
+
+        .row-sun td { background-color: #fff1f2 !important; color: #ef4444; }
+        .row-sat td { background-color: #eff6ff !important; color: #3b82f6; }
+        
+        .type-tag { display: inline-block; background: #e0e7ff; color: #4338ca; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; }
+        .has-event { cursor: pointer; }
+        .has-event:hover { background: #f8fafc; }
+        .empty-text { color: #d1d5db; font-style: italic; }
+
+        /* モーダル */
+        #event-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 9999; display: flex; align-items: center; justify-content: center; visibility: hidden; opacity: 0; transition: opacity 0.3s, visibility 0.3s; }
+        #event-modal.show { visibility: visible; opacity: 1; }
+        .modal-content { background: white; width: 95%; max-width: 440px; padding: 24px 20px; border-radius: 28px; transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); max-height: 90vh; overflow-y: auto; }
+        .event-card { text-align: left; }
+        .event-card + .event-card { margin-top: 30px; padding-top: 30px; border-top: 2px dashed #e5e7eb; }
+        .info-group { margin-bottom: 15px; }
+        .info-label { display: block; font-size: 13px; font-weight: 800; color: #6b7280; margin-bottom: 3px; }
+        .info-value { display: block; font-size: 1.2rem; font-weight: 700; color: #1f2937; line-height: 1.4; }
+        .highlight-value { border-left: 5px solid #2563eb; padding-left: 12px; font-size: 1.4rem; }
+        .close-btn { margin-top: 20px; width: 100%; background: #111827; color: white; padding: 16px; border-radius: 18px; font-weight: 700; font-size: 1.1rem; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <button class="nav-btn" onclick="changeMonth(-1)">＜</button>
-        <span id="current-month"></span>
-        <button class="nav-btn" onclick="changeMonth(1)">＞</button>
+
+    <div class="fixed-header">
+        <div class="header-top">
+            <h1 class="text-xl font-black">予定一覧</h1>
+            <a href="calendar.html" class="back-btn">← 戻る</a>
+        </div>
+        <div class="schedule-nav">
+            <button class="nav-btn" onclick="changeMonth(-1)">＜</button>
+            <div class="flex items-center">
+                <select id="select-year" class="select-date" onchange="jumpToDate()"></select>
+                <span class="text-xl font-black mr-2">年</span>
+                <select id="select-month" class="select-date" onchange="jumpToDate()"></select>
+                <span class="text-xl font-black">月</span>
+            </div>
+            <button class="nav-btn" onclick="changeMonth(1)">＞</button>
+        </div>
     </div>
-    <div id="event-list"></div>
-    <div style="text-align: center; margin-top: 20px;">
-        <a href="index.html">カレンダーに戻る</a>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-date">日付</th>
+                    <th class="col-type">種別</th>
+                    <th class="col-time">時間</th>
+                    <th class="col-target">対象</th>
+                    <th class="col-name">内容</th>
+                    <th class="col-loc">場所</th>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+    </div>
+
+    <div id="event-modal">
+        <div class="modal-content text-center">
+            <div id="modal-date-display" class="text-2xl font-black mb-8 text-gray-900 border-b-4 border-blue-600 inline-block px-2"></div>
+            <div id="modal-events-container"></div>
+            <button onclick="closeModal()" class="close-btn">閉じる</button>
+        </div>
     </div>
 
     <script>
-        const GSS_URL = 'https://script.google.com/macros/s/AKfycbwTNgQ4Axd7QzTxj5zMTM9zYFlpsGiuTz1AxDjfFOu76O2M1OtDUTAH6-pY7duotm7Eow/exec';
-        
+        const url = 'https://script.google.com/macros/s/AKfycbwTNgQ4Axd7QzTxj5zMTM9zYFlpsGiuTz1AxDjfFOu76O2M1OtDUTAH6-pY7duotm7Eow/exec';
+        let currentViewDate = new Date(); // 今日を基準に初期化
         let allEvents = [];
-        let currentYear = 2026;
-        let currentMonth = 4;
 
-        const extractTime = (val) => {
-            if (!val) return "";
-            const s = val.toString();
-            const match = s.match(/\d{1,2}:\d{2}/);
-            return match ? match[0] : "";
-        };
+        // プルダウンの生成
+        function initSelects() {
+            const yearSelect = document.getElementById('select-year');
+            const monthSelect = document.getElementById('select-month');
+            const currentYear = new Date().getFullYear();
 
-        const getDayOfWeek = (year, month, day) => {
-            const date = new Date(year, month - 1, day);
-            const days = ['日', '月', '火', '水', '木', '金', '土'];
-            return days[date.getDay()];
-        };
-
-        function loadEventsAndRender() {
-            fetch(GSS_URL)
-                .then(res => res.json())
-                .then(data => {
-                    allEvents = data;
-                    renderList();
-                });
-        }
-
-function renderList() {
-            const listDiv = document.getElementById('event-list');
-            listDiv.innerHTML = '';
-            document.getElementById('current-month').innerText = `${currentYear}年${currentMonth}月`;
-            
-            const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
-
-            for (let i = 1; i <= daysInMonth; i++) {
-                const dateStr = `${currentYear}-${String(currentMonth).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
-                const dayEvents = allEvents.filter(e => e.start === dateStr);
-                const dayOfWeek = getDayOfWeek(currentYear, currentMonth, i);
-                
-                const row = document.createElement('div');
-                row.className = 'day-row';
-                
-                // --- 修正箇所：日付部分のリンク生成を条件分岐 ---
-                const hasEvent = dayEvents.length > 0;
-                const dateDisplay = `${i}日 (${dayOfWeek})`;
-                const dateCol = hasEvent 
-                    ? `<div class="date-col"><a href="attendance.html?date=${dateStr}">${dateDisplay}</a></div>`
-                    : `<div class="date-col">${dateDisplay}</div>`; // リンクなし
-
-                if (hasEvent) {
-                    const eventDetails = dayEvents.map(e => {
-                        const p = e.extendedProps || {};
-                        const start = extractTime(p.startTime);
-                        const end = extractTime(p.endTime);
-                        const timeInfo = (start && end) ? `${start}-${end}` : '';
-                        const locationInfo = p.location ? `(${p.location})` : '';
-                        
-                        return `
-                            <div class="event-item">
-                                <strong>${e.title}:</strong> 
-                                <span>${p.eventName || ''}</span>
-                                <span class="time-info">${timeInfo}</span>
-                                <span>${locationInfo}</span>
-                            </div>
-                        `;
-                    }).join('');
-                    
-                    row.innerHTML = `${dateCol}<div class="event-col">${eventDetails}</div>`;
-                    
-                    row.onclick = (e) => {
-                        if (e.target.tagName === 'A') return;
-                        
-                        let message = `【${i}日 (${dayOfWeek}) の予定】\n\n`;
-                        dayEvents.forEach((ev, index) => {
-                            const p = ev.extendedProps || {};
-                            message += `●予定${index + 1}: ${ev.title}\n 時間: ${extractTime(p.startTime)}-${extractTime(p.endTime)}\n 詳細: ${p.eventName || '---'}\n 場所: ${p.location || '---'}\n 備考: ${p.remarks || '---'}\n\n`;
-                        });
-                        alert(message);
-                    };
-                } else {
-                    row.innerHTML = `${dateCol}<div class="event-col">-</div>`;
-                }
-                listDiv.appendChild(row);
+            // 年：前後2年分程度
+            for (let i = currentYear - 1; i <= currentYear + 2; i++) {
+                const opt = document.createElement('option');
+                opt.value = i; opt.innerText = i;
+                yearSelect.appendChild(opt);
+            }
+            // 月：1-12月
+            for (let i = 1; i <= 12; i++) {
+                const opt = document.createElement('option');
+                opt.value = i - 1; opt.innerText = i;
+                monthSelect.appendChild(opt);
             }
         }
-        function changeMonth(delta) {
-            currentMonth += delta;
-            if (currentMonth > 12) { currentMonth = 1; currentYear++; }
-            if (currentMonth < 1) { currentMonth = 12; currentYear--; }
-            renderList();
+
+        async function fetchAndRender() {
+            try {
+                if (allEvents.length === 0) {
+                    const response = await fetch(url);
+                    allEvents = await response.json();
+                }
+                renderTable();
+            } catch (e) { console.error(e); }
         }
 
-        loadEventsAndRender();
+        function renderTable() {
+            const year = currentViewDate.getFullYear();
+            const month = currentViewDate.getMonth();
+            const lastDay = new Date(year, month + 1, 0).getDate();
+            const days = ['日','月','火','水','木','金','土'];
+            
+            // プルダウンの値を現在の表示月に合わせる
+            document.getElementById('select-year').value = year;
+            document.getElementById('select-month').value = month;
+
+            const tableBody = document.getElementById('table-body');
+            tableBody.innerHTML = '';
+
+            const fmt = (t) => {
+                if(!t || t === 'undefined' || t === '--:--' || t === '00:00') return ''; 
+                const d = new Date(t);
+                return isNaN(d.getTime()) ? (t === '00:00' || t === '--:--' ? '' : t) : d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');
+            };
+
+            for (let day = 1; day <= lastDay; day++) {
+                const dateObj = new Date(year, month, day);
+                const dayW = days[dateObj.getDay()];
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const dayEvents = allEvents.filter(e => e.start.startsWith(dateStr));
+                
+                const tr = document.createElement('tr');
+                if(dateObj.getDay() === 0) tr.classList.add('row-sun');
+                if(dateObj.getDay() === 6) tr.classList.add('row-sat');
+
+                if (dayEvents.length > 0) {
+                    tr.classList.add('has-event');
+                    const attendanceUrl = `attendance.html?date=${dateStr}`;
+                    tr.onclick = (e) => { if (!e.target.classList.contains('date-link')) openModal(dayEvents); };
+
+                    tr.innerHTML = `
+                        <td class="col-date"><a href="${attendanceUrl}" class="date-link">${day}(${dayW})</a></td>
+                        <td class="col-type">${dayEvents.map(e => e.extendedProps.type ? `<span class="type-tag">${e.extendedProps.type}</span>` : '').join('<br>')}</td>
+                        <td class="col-time">${dayEvents.map(e => {
+                            const start = fmt(e.extendedProps.startTime);
+                            const end = fmt(e.extendedProps.endTime);
+                            return start || end ? `<span class="text-blue-600">${start} 〜 ${end}</span>` : '';
+                        }).join('<br>')}</td>
+                        <td class="col-target">${dayEvents.map(e => e.title || '').join('<br>')}</td>
+                        <td class="col-name">${dayEvents.map(e => e.extendedProps.eventName || '').join('<br>')}</td>
+                        <td class="col-loc">${dayEvents.map(e => (e.extendedProps.location === '---' ? '' : e.extendedProps.location) || '').join('<br>')}</td>
+                    `;
+                } else {
+                    tr.innerHTML = `
+                        <td class="col-date"><span class="date-text">${day}(${dayW})</span></td>
+                        <td colspan="5" class="empty-text text-center text-gray-300">---</td>
+                    `;
+                }
+                tableBody.appendChild(tr);
+            }
+        }
+
+        function changeMonth(diff) {
+            currentViewDate.setMonth(currentViewDate.getMonth() + diff);
+            renderTable();
+        }
+
+        function jumpToDate() {
+            const y = document.getElementById('select-year').value;
+            const m = document.getElementById('select-month').value;
+            currentViewDate = new Date(y, m, 1);
+            renderTable();
+        }
+
+        function openModal(dayEvents) {
+            const container = document.getElementById('modal-events-container');
+            container.innerHTML = '';
+            const fmt = (t) => {
+                if(!t || t === '--:--' || t === '00:00') return '';
+                const d = new Date(t);
+                return isNaN(d.getTime()) ? t : d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');
+            };
+            document.getElementById('modal-date-display').innerText = dayEvents[0].start.split('T')[0];
+            
+            dayEvents.forEach(event => {
+                const p = event.extendedProps;
+                const start = fmt(p.startTime);
+                const end = fmt(p.endTime);
+                const loc = (p.location === '---') ? '' : p.location;
+                const card = document.createElement('div');
+                card.className = 'event-card';
+                card.innerHTML = `
+                    ${p.type ? `<div class="info-group"><span class="info-label">種別</span><div class="mt-1"><span class="type-tag">${p.type}</span></div></div>` : ''}
+                    ${start || end ? `<div class="info-group"><span class="info-label">時間</span><span class="info-value text-blue-600">${start} 〜 ${end}</span></div>` : ''}
+                    <div class="info-group">
+                        <span class="info-label">対象</span>
+                        <span class="info-value highlight-value">${event.title || '---'}</span>
+                    </div>
+                    ${p.eventName ? `<div class="info-group"><span class="info-label">内容（イベント名）</span><span class="info-value">${p.eventName}</span></div>` : ''}
+                    ${loc ? `<div class="info-group"><span class="info-label">場所</span><span class="info-value">${loc}</span></div>` : ''}
+                    ${p.remarks && p.remarks !== '---' ? `<div class="info-group"><span class="info-label">備考</span><span class="info-value font-normal text-gray-500 text-sm">${p.remarks}</span></div>` : ''}
+                `;
+                container.appendChild(card);
+            });
+            document.getElementById('event-modal').classList.add('show');
+        }
+
+        function closeModal() { document.getElementById('event-modal').classList.remove('show'); }
+
+        initSelects();
+        fetchAndRender();
     </script>
 </body>
 </html>
