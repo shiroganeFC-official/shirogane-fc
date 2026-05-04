@@ -61,7 +61,16 @@
         .m-text-box { flex-grow: 1; }
         .m-label { display: block; font-size: 0.75rem; font-weight: 800; color: #6b7280; margin-bottom: 1px; }
         .m-value { display: block; font-size: 1.05rem; font-weight: 700; color: #1f2937; }
+        
+        /* 対象セクションの強調（背景色あり） */
+        .m-value-highlight-target { font-size: 1.2rem; color: #ffffff; font-weight: 800; background-color: #2563eb; padding: 4px 12px; border-radius: 8px; display: inline-block; margin-top: 2px;
+        min-width: 80%;       /* 横幅を親要素の80%に設定 */
+    text-align: center;    /* 文字を中央に寄せる */
+        }
+        
+        /* 内容セクションの強調（左線のみ） */
         .m-value-highlight { font-size: 1.2rem; color: #111827; font-weight: 800; border-left: 4px solid #2563eb; padding-left: 10px; margin-left: -14px; }
+        
         .close-btn { margin-top: 35px; width: 100%; background: #111827; color: white; padding: 16px; border-radius: 16px; font-weight: 900; font-size: 1.1rem; }
     </style>
 </head>
@@ -166,7 +175,6 @@
 
                 if (dayEvents.length > 0) {
                     tr.classList.add('has-event');
-                    // 日付リンクをクリックした時はモーダルを開かない
                     tr.onclick = (e) => { 
                         if (!e.target.closest('.date-link')) openModal(dayEvents); 
                     };
@@ -206,7 +214,10 @@
                 card.innerHTML = `
                     <div class="m-info-group">
                         <div class="m-icon-box"><span class="m-type-emoji">👥</span></div>
-                        <div class="m-text-box"><span class="m-label">対象</span><span class="m-value m-value-highlight">${event.title || '---'}</span></div>
+                        <div class="m-text-box">
+                            <span class="m-label">対象</span>
+                            <span class="m-value-highlight-target">${event.title || '---'}</span>
+                        </div>
                     </div>
                     <div class="m-info-group">
                         <div class="m-icon-box"><span class="m-type-emoji">📋</span></div>
