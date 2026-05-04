@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEMBERS | 白金FC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; background-color: #ffffff; color: #111827; overflow-x: hidden; }
+        .tab-btn { transition: all 0.3s ease; position: relative; cursor: pointer; }
+        .tab-btn.active { color: #000; }
+        .tab-btn.active::after { content: ""; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 20px; height: 3px; background: #ef4444; border-radius: 10px; }
+        
+        .image-container { 
+            aspect-ratio: 1 / 1; border-radius: 35px; 
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); 
+            display: flex; align-items: center; justify-content: center; 
+            border: 1px solid #f1f5f9; position: relative;
+        }
+        
+        .silhouette {
+            width: 45%; height: 45%; background: #cbd5e1; border-radius: 50% 50% 20% 20%; position: relative; transition: all 0.5s ease;
+        }
+        .silhouette::before {
+            content: ""; width: 60%; height: 60%; background: #cbd5e1; border-radius: 50%; position: absolute; top: -70%; left: 20%;
+        }
+        
+        .member-card:hover .silhouette, .member-card:hover .silhouette::before { background: #3b82f6; }
+        .member-card:hover .image-container { border-color: #3b82f6; box-shadow: 0 15px 30px -10px rgba(59, 130, 246, 0.2); }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-white">
+
+    <header class="pt-20 pb-12 text-center">
+        <h2 class="text-xs font-black tracking-[0.3em] text-red-600 uppercase mb-3 italic">Our Identity</h2>
+        <h1 class="text-5xl font-black italic tracking-tighter sm:text-7xl uppercase">Members</h1>
+        <div class="w-16 h-1.5 bg-black mx-auto mt-8 rounded-full"></div>
+    </header>
+
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 mb-16">
+        <div class="flex justify-center items-center gap-8 py-6 sm:gap-16">
+            <div onclick="switchTab('coaches')" id="btn-coaches" class="tab-btn active text-sm font-black tracking-tighter sm:text-base">監督・コーチ</div>
+            <div onclick="switchTab('executives')" id="btn-executives" class="tab-btn text-gray-400 text-sm font-black tracking-tighter sm:text-base">役員</div>
+            <div onclick="switchTab('players')" id="btn-players" class="tab-btn text-gray-400 text-sm font-black tracking-tighter sm:text-base">選手</div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 pb-40">
+        
+        <section id="coaches" class="tab-content active">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-10 sm:gap-x-10 sm:gap-y-20">
+                <div class="member-card">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <div class="text-center sm:text-left">
+                        <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">顧問</span>
+                        <h3 class="text-lg font-black tracking-tighter mt-1 sm:text-xl">H Watamori</h3>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <div class="text-center sm:text-left">
+                        <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">コーチ</span>
+                        <h3 class="text-lg font-black tracking-tighter mt-1 sm:text-xl">Y Nakayama</h3>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <div class="text-center sm:text-left">
+                        <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">コーチ</span>
+                        <h3 class="text-lg font-black tracking-tighter mt-1 sm:text-xl">S Abe</h3>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <div class="text-center sm:text-left">
+                        <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">代表</span>
+                        <h3 class="text-lg font-black tracking-tighter mt-1 sm:text-xl">Y Sunahara</h3>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <div class="text-center sm:text-left">
+                        <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">監督</span>
+                        <h3 class="text-lg font-black tracking-tighter mt-1 sm:text-xl">W Soya</h3>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <div class="text-center sm:text-left">
+                        <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">コーチ</span>
+                        <h3 class="text-lg font-black tracking-tighter mt-1 sm:text-xl">J.Sunahara</h3>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <div class="text-center sm:text-left">
+                        <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">コーチ</span>
+                        <h3 class="text-lg font-black tracking-tighter mt-1 sm:text-xl">S.Murakami</h3>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <div class="text-center sm:text-left">
+                        <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">コーチ</span>
+                        <h3 class="text-lg font-black tracking-tighter mt-1 sm:text-xl">S.S</h3>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <div class="text-center sm:text-left">
+                        <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">コーチ</span>
+                        <h3 class="text-lg font-black tracking-tighter mt-1 sm:text-xl">N</h3>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <div class="text-center sm:text-left">
+                        <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">GKコーチ</span>
+                        <h3 class="text-lg font-black tracking-tighter mt-1 sm:text-xl">K.Miyasaka</h3>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <div class="text-center sm:text-left">
+                        <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">コーチ</span>
+                        <h3 class="text-lg font-black tracking-tighter mt-1 sm:text-xl">Ｔ.Sugawara</h3>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <div class="text-center sm:text-left">
+                        <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">コーチ</span>
+                        <h3 class="text-lg font-black tracking-tighter mt-1 sm:text-xl">Ｅ.Imai</h3>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <div class="text-center sm:text-left">
+                        <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">コーチ</span>
+                        <h3 class="text-lg font-black tracking-tighter mt-1 sm:text-xl">T.Iikura</h3>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <div class="text-center sm:text-left">
+                        <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">コーチ</span>
+                        <h3 class="text-lg font-black tracking-tighter mt-1 sm:text-xl">H.Kawaguchi</h3>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <div class="text-center sm:text-left">
+                        <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">コーチ</span>
+                        <h3 class="text-lg font-black tracking-tighter mt-1 sm:text-xl">N.Tayama</h3>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <div class="text-center sm:text-left">
+                        <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">コーチ</span>
+                        <h3 class="text-lg font-black tracking-tighter mt-1 sm:text-xl">R.Suzuki</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="executives" class="tab-content">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
+                <div class="member-card text-center">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">役員</span>
+                    <h3 class="text-xl font-black tracking-tighter mt-1">M.Sunahara</h3>
+                </div>
+                <div class="member-card text-center">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">役員</span>
+                    <h3 class="text-xl font-black tracking-tighter mt-1">N.Ito</h3>
+                </div>
+                <div class="member-card text-center">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">役員</span>
+                    <h3 class="text-xl font-black tracking-tighter mt-1">A.Kuno</h3>
+                </div>
+                <div class="member-card text-center">
+                    <div class="image-container mb-4"><div class="silhouette"></div></div>
+                    <span class="text-[10px] font-black text-blue-600 tracking-widest uppercase">役員</span>
+                    <h3 class="text-xl font-black tracking-tighter mt-1">M.Nagahashi</h3>
+                </div>
+            </div>
+        </section>
+
+        <section id="players" class="tab-content">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">12期 / 5年</p>
+                    <h4 class="text-sm font-black">M.Sunahara</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">13期 / 5年</p>
+                    <h4 class="text-sm font-black">K.Yamauchi</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">13期 / 5年</p>
+                    <h4 class="text-sm font-black">S.Itou</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">13期 / 5年</p>
+                    <h4 class="text-sm font-black">R.Watanabe</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">13期 / 5年</p>
+                    <h4 class="text-sm font-black">S.Sakai</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">15期 / 5年</p>
+                    <h4 class="text-sm font-black">E.Kuno</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">16期 / 5年</p>
+                    <h4 class="text-sm font-black">Y.Imai</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">14期 / 4年</p>
+                    <h4 class="text-sm font-black">K.Sunahara</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">15期 / 4年</p>
+                    <h4 class="text-sm font-black">S.Tazawa</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">15期 / 4年</p>
+                    <h4 class="text-sm font-black">Ｙ.Nagahashi</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">15期 / 4年</p>
+                    <h4 class="text-sm font-black">Ｙ.Fukano</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">15期 / 4年</p>
+                    <h4 class="text-sm font-black">R.Hayakawa</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">17期 / 4年</p>
+                    <h4 class="text-sm font-black">H.karahashi</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">18期 / 4年</p>
+                    <h4 class="text-sm font-black">W.Ayano</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">19期 / 4年</p>
+                    <h4 class="text-sm font-black">H.Aoyama</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">16期 / 3年</p>
+                    <h4 class="text-sm font-black">T.Kawaguchi</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">16期 / 3年</p>
+                    <h4 class="text-sm font-black">M.Urita</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">17期 / 3年</p>
+                    <h4 class="text-sm font-black">K.Kawana</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">18期 / 3年</p>
+                    <h4 class="text-sm font-black">Y.Tateishi</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">18期 / 3年</p>
+                    <h4 class="text-sm font-black">A.Kawazure</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">18期 / 3年</p>
+                    <h4 class="text-sm font-black">M.Suzuki</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">15期 / 2年</p>
+                    <h4 class="text-sm font-black">H.Kuno</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">16期 / 2年</p>
+                    <h4 class="text-sm font-black">A.Imai</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">16期 / 2年</p>
+                    <h4 class="text-sm font-black">Y.Kaneoka</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">17期 / 2年</p>
+                    <h4 class="text-sm font-black">S.Watanabe</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">17期 / 2年</p>
+                    <h4 class="text-sm font-black">A.Tayama</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">18期 / 2年</p>
+                    <h4 class="text-sm font-black">S.Kimura</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">18期 / 2年</p>
+                    <h4 class="text-sm font-black">K.Sakunrang</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">18期 / 2年</p>
+                    <h4 class="text-sm font-black">G.Arashiro</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">17期 / 1年</p>
+                    <h4 class="text-sm font-black">T.Tomita</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">17期 / 1年</p>
+                    <h4 class="text-sm font-black">R.Hayakawa</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">18期 / 1年</p>
+                    <h4 class="text-sm font-black">Y.Arashiro</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">19期 / 1年</p>
+                    <h4 class="text-sm font-black">H.Hamaguchi</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">19期 / 1年</p>
+                    <h4 class="text-sm font-black">K.Sunahara</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">19期 / 1年</p>
+                    <h4 class="text-sm font-black">E.Hamaguchi</h4>
+                </div>
+                <div class="player-card p-4 border border-gray-100 rounded-[30px] bg-white">
+                    <div class="aspect-square bg-gray-50 flex items-center justify-center rounded-2xl mb-3"><div class="silhouette scale-50 opacity-10"></div></div>
+                    <p class="text-[9px] font-bold text-gray-400">19期 / 1年</p>
+                    <h4 class="text-sm font-black">A.Tateishi</h4>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('text-gray-400');
+            });
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.add('active');
+            activeBtn.classList.remove('text-gray-400');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
