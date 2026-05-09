@@ -404,20 +404,32 @@
             <span class="modal-close">&times;</span>
             <img class="modal-content" id="modalImg">
         </div>
-    <script>
-    function checkScheduleAccess() {
-        const password = prompt("パスワードを入力してください：");
-        const correctPassword = "2026fc"; // ここにパスワードを記述
+<script>
+function checkScheduleAccess() {
+    // 🔐 チーム独自の秘密パスワード
+    const correctPassword = "2026fc"; 
 
-        if (password === correctPassword) {
-            // パスワードが一致した場合のみ移動
-            window.location.href = "list.html";
-        } else if (password !== null) {
-            // 間違っていて、かつキャンセルボタンが押されていない場合
-            alert("パスワードが正しくありません。");
-        }
+    // ★手順①：すでにブラウザに「目印（authトークン）」があるか確認
+    if (sessionStorage.getItem('fc_scheduled_auth') === 'true') {
+        // 目印があれば、入力不要で移動
+        window.location.href = "list.html";
+        return; // ここで処理終了
     }
-    </script>
+
+    // ★手順②：目印がない場合のみ、パスワードを求める
+    const password = prompt("スケジュールを見るにはパスワードが必要です。");
+
+    if (password === correctPassword) {
+        // パスワードが合っていたら、sessionStorageに「目印」を保存
+        sessionStorage.setItem('fc_scheduled_auth', 'true');
+        // 移動
+        window.location.href = "list.html";
+    } else if (password !== null) {
+        // 間違っていて、かつキャンセルボタンが押されていない場合
+        alert("パスワードが正しくありません。");
+    }
+}
+</script>
     <script src="script.js"></script>
 </body>
 </html>
